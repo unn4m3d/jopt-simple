@@ -61,7 +61,6 @@ public class HelpFormatterExample {
             }
         };
 
-        parser.formatHelpWith( new MyFormatter() );
-        parser.printHelpOn( System.out );
+        parser.printHelp().formatWith( new MyFormatter() ).on(System.out);
     }
 }

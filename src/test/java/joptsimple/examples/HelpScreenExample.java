@@ -1,13 +1,12 @@
 package joptsimple.examples;
 
-import java.io.File;
-
-import static java.io.File.*;
-import static java.util.Arrays.*;
-
 import joptsimple.OptionParser;
 
-import static joptsimple.util.DateConverter.*;
+import java.io.File;
+
+import static java.io.File.pathSeparatorChar;
+import static java.util.Arrays.asList;
+import static joptsimple.util.DateConverter.datePattern;
 
 public class HelpScreenExample {
     public static void main( String[] args ) throws Exception {
@@ -30,6 +29,6 @@ public class HelpScreenExample {
             }
         };
 
-        parser.printHelpOn( System.out );
+        parser.printHelp().on( System.out );
     }
 }
