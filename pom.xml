@@ -123,12 +123,18 @@
                 <executions>
                     <execution>
                         <id>check-signature</id>
-                        <!-- Animal sniffer only checks production classes, not tests -->
-                        <phase>process-classes</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
+                    <!-- Needs 1.10 version of animal sniffer plugin
+                    <execution>
+                        <id>check-test-signature</id>
+                        <goals>
+                            <goal>test-check</goal>
+                        </goals>
+                    </execution>
+                    -->
                 </executions>
             </plugin>
             <plugin>
