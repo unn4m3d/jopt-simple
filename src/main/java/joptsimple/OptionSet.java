@@ -316,6 +316,6 @@ public class OptionSet {
         Map<String, List<?>> defaults = new HashMap<String, List<?>>();
         for ( Map.Entry<String, AbstractOptionSpec<?>> each : recognizedSpecs.entrySet() )
             defaults.put( each.getKey(), each.getValue().defaultValues() );
-        return defaults;
+        return unmodifiableMap( defaults );
     }
 }
