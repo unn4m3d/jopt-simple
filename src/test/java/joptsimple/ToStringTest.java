@@ -45,7 +45,7 @@ public class ToStringTest {
     private final Object subject;
     private final String[] substrings;
 
-    public ToStringTest( Object subject, String[] substrings ) {
+    public ToStringTest( final Object subject, final String[] substrings ) {
         this.subject = subject;
         this.substrings = substrings.clone();
     }
@@ -65,9 +65,9 @@ public class ToStringTest {
 
     @Test
     public void givesUsefulStringRepresentations() {
-        String stringRepresentation = subject.toString();
+        final String stringRepresentation = subject.toString();
 
-        for ( String each : substrings )
+        for ( final String each : substrings )
             assertThat( stringRepresentation, containsString( each ) );
     }
 }

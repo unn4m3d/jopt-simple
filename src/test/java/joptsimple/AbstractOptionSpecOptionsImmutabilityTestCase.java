@@ -35,7 +35,7 @@ import org.infinitest.toolkit.UnmodifiableCollectionTestSupport;
 public abstract class AbstractOptionSpecOptionsImmutabilityTestCase extends UnmodifiableCollectionTestSupport<String> {
     @Override
     protected Collection<String> newCollection() {
-        AbstractOptionSpec<?> spec = newOptionSpec( containedItem() );
+        final AbstractOptionSpec<?> spec = newOptionSpec( containedItem() );
         return spec.options();
     }
 

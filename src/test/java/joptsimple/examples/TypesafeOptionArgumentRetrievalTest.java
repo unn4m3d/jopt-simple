@@ -14,19 +14,19 @@ import static org.junit.Assert.*;
 public class TypesafeOptionArgumentRetrievalTest {
     @Test
     public void allowsTypesafeRetrievalOfOptionArguments() {
-        OptionParser parser = new OptionParser();
-        OptionSpec<Integer> count = parser.accepts( "count" ).withRequiredArg().ofType( Integer.class );
-        OptionSpec<File> outputDir = parser.accepts( "output-dir" ).withOptionalArg().ofType( File.class );
-        OptionSpec<Void> verbose = parser.accepts( "verbose" );
-        OptionSpec<File> files = parser.nonOptions().ofType( File.class );
+        final OptionParser parser = new OptionParser();
+        final OptionSpec<Integer> count = parser.accepts( "count" ).withRequiredArg().ofType( Integer.class );
+        final OptionSpec<File> outputDir = parser.accepts( "output-dir" ).withOptionalArg().ofType( File.class );
+        final OptionSpec<Void> verbose = parser.accepts( "verbose" );
+        final OptionSpec<File> files = parser.nonOptions().ofType( File.class );
 
-        OptionSet options = parser.parse( "--count", "3", "--output-dir", "/tmp", "--verbose", "a.txt", "b.txt" );
+        final OptionSet options = parser.parse( "--count", "3", "--output-dir", "/tmp", "--verbose", "a.txt", "b.txt" );
 
         assertTrue( options.has( verbose ) );
 
         assertTrue( options.has( count ) );
         assertTrue( options.hasArgument( count ) );
-        Integer expectedCount = 3;
+        final Integer expectedCount = 3;
         assertEquals( expectedCount, options.valueOf( count ) );
         assertEquals( expectedCount, count.value( options ) );
         assertEquals( asList( expectedCount ), options.valuesOf( count ) );
@@ -35,7 +35,7 @@ public class TypesafeOptionArgumentRetrievalTest {
 
         assertTrue( options.has( outputDir ) );
         assertTrue( options.hasArgument( outputDir ) );
-        File expectedFile = new File( "/tmp" );
+        final File expectedFile = new File( "/tmp" );
         assertEquals( expectedFile, options.valueOf( outputDir ) );
         assertEquals( expectedFile, outputDir.value( options ) );
         assertEquals( asList( expectedFile ), options.valuesOf( outputDir ) );

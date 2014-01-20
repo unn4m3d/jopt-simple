@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 public class PosixlyCorrectTest {
     @Test
     public void supportsPosixlyCorrectBehavior() {
-        OptionParser parser = new OptionParser( "i:j::k" );
-        String[] arguments = { "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "bah" };
+        final OptionParser parser = new OptionParser( "i:j::k" );
+        final String[] arguments = { "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "bah" };
 
         OptionSet options = parser.parse( arguments );
 

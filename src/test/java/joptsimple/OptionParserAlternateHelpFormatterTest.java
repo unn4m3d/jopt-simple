@@ -46,12 +46,12 @@ public class OptionParserAlternateHelpFormatterTest extends AbstractOptionParser
     @Test
     public void getsFedOptionDescriptorsForRecognizedOptions() {
         assertEquals( 2, captured.size() );
-        Iterator<? extends Map.Entry<String,? extends OptionDescriptor>> iterator = captured.entrySet().iterator();
-        Map.Entry<String, ? extends OptionDescriptor> first = iterator.next();
+        final Iterator<? extends Map.Entry<String,? extends OptionDescriptor>> iterator = captured.entrySet().iterator();
+        final Map.Entry<String, ? extends OptionDescriptor> first = iterator.next();
         assertEquals( "[arguments]", first.getKey() );
-        Map.Entry<String, ? extends OptionDescriptor> second = iterator.next();
+        final Map.Entry<String, ? extends OptionDescriptor> second = iterator.next();
         assertEquals("b", second.getKey());
-        OptionDescriptor descriptor = second.getValue();
+        final OptionDescriptor descriptor = second.getValue();
         assertThat( descriptor.options(), hasSameContentsAs( asList( "b" ) ) );
         assertEquals( "boo", descriptor.description() );
         assertFalse( descriptor.acceptsArguments() );

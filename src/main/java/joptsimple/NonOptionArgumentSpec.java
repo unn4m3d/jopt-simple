@@ -60,7 +60,7 @@ public class NonOptionArgumentSpec<V> extends AbstractOptionSpec<V> {
         this("");
     }
 
-    NonOptionArgumentSpec( String description ) {
+    NonOptionArgumentSpec( final String description ) {
         super( asList( NAME ), description );
     }
 
@@ -90,7 +90,7 @@ public class NonOptionArgumentSpec<V> extends AbstractOptionSpec<V> {
      * @throws IllegalArgumentException if the type does not have the standard conversion methods
      */
     @SuppressWarnings( "unchecked" )
-    public <T> NonOptionArgumentSpec<T> ofType( Class<T> argumentType ) {
+    public <T> NonOptionArgumentSpec<T> ofType( final Class<T> argumentType ) {
         converter = (ValueConverter<V>) findConverter( argumentType );
         return (NonOptionArgumentSpec<T>) this;
     }
@@ -108,7 +108,7 @@ public class NonOptionArgumentSpec<V> extends AbstractOptionSpec<V> {
      * @throws NullPointerException if the converter is {@code null}
      */
     @SuppressWarnings( "unchecked" )
-    public final <T> NonOptionArgumentSpec<T> withValuesConvertedBy( ValueConverter<T> aConverter ) {
+    public final <T> NonOptionArgumentSpec<T> withValuesConvertedBy( final ValueConverter<T> aConverter ) {
         if ( aConverter == null )
             throw new NullPointerException( "illegal null converter" );
 
@@ -123,18 +123,18 @@ public class NonOptionArgumentSpec<V> extends AbstractOptionSpec<V> {
      * @param description describes the nature of the argument of this spec's option
      * @return self, so that the caller can add clauses to the fluent interface sentence
      */
-    public NonOptionArgumentSpec<V> describedAs( String description ) {
+    public NonOptionArgumentSpec<V> describedAs( final String description ) {
         argumentDescription = description;
         return this;
     }
 
-    public final V convert( String argument ) {
+    public final V convert( final String argument ) {
         return convertWith( converter, argument );
     }
 
     @Override
-    void handleOption( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions,
-        String detectedArgument ) {
+    void handleOption( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions,
+        final String detectedArgument ) {
 
         detectedOptions.addWithArgument( this, detectedArgument );
     }

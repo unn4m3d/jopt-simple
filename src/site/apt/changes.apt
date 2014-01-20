@@ -2,6 +2,12 @@
                                        Change Log
                                        ----------
 
+Changes in version 5.0
+
+    * Replace Joda-Time with Java 8 time API.
+
+    * Provide control of option ordering with <<<OptionOrder>>>.
+
 Changes in version 4.6
 
     * Resolved {{{https://github.com/pholser/jopt-simple/issues/31} gh-31}} by offering

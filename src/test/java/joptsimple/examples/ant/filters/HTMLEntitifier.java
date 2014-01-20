@@ -36,15 +36,15 @@ public class HTMLEntitifier extends BaseFilterReader implements ChainableReader 
     /**
      * @param source where the data to filter comes from
      */
-    public HTMLEntitifier( Reader source ) {
+    public HTMLEntitifier( final Reader source ) {
         super( source );
     }
 
     /**
      * {@inheritDoc}
      */
-    public Reader chain( Reader source ) {
-        HTMLEntitifier newFilter = new HTMLEntitifier( source );
+    public Reader chain( final Reader source ) {
+        final HTMLEntitifier newFilter = new HTMLEntitifier( source );
         newFilter.setInitialized( true );
 
         return newFilter;
@@ -59,7 +59,7 @@ public class HTMLEntitifier extends BaseFilterReader implements ChainableReader 
             setInitialized( true );
 
         if ( replacementIndex > -1 ) {
-            int ch = replacementData.charAt( replacementIndex++ );
+            final int ch = replacementData.charAt( replacementIndex++ );
 
             if ( replacementIndex >= replacementData.length() )
                 replacementIndex = -1;
@@ -67,7 +67,7 @@ public class HTMLEntitifier extends BaseFilterReader implements ChainableReader 
             return ch;
         }
 
-        int nextChar = in.read();
+        final int nextChar = in.read();
 
         if ( ENTITIES.containsKey( nextChar ) ) {
             replacementData = ENTITIES.get( nextChar );

@@ -36,8 +36,8 @@ import org.infinitest.toolkit.UnmodifiableListTestSupport;
 public class OptionSetValuesOfSpecImmutabilityTest extends UnmodifiableListTestSupport<String> {
     @Override
     protected List<String> newList() {
-        RequiredArgumentOptionSpec<String> optionA = new RequiredArgumentOptionSpec<String>( "a" );
-        OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
+        final RequiredArgumentOptionSpec<String> optionA = new RequiredArgumentOptionSpec<String>( "a" );
+        final OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
         options.addWithArgument( optionA, "anArgument" );
         options.addWithArgument( optionA, "anotherArgument" );
         return options.valuesOf( optionA );

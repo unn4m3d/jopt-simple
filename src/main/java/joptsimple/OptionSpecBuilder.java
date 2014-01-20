@@ -60,7 +60,7 @@ import java.util.List;
 public class OptionSpecBuilder extends NoArgumentOptionSpec {
     private final OptionParser parser;
 
-    OptionSpecBuilder( OptionParser parser, Collection<String> options, String description ) {
+    OptionSpecBuilder( final OptionParser parser, final Collection<String> options, final String description ) {
         super( options, description );
 
         this.parser = parser;
@@ -77,7 +77,7 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @return a specification for the option
      */
     public ArgumentAcceptingOptionSpec<String> withRequiredArg() {
-        ArgumentAcceptingOptionSpec<String> newSpec =
+        final ArgumentAcceptingOptionSpec<String> newSpec =
             new RequiredArgumentOptionSpec<String>( options(), description() );
         parser.recognize( newSpec );
 
@@ -90,7 +90,7 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @return a specification for the option
      */
     public ArgumentAcceptingOptionSpec<String> withOptionalArg() {
-        ArgumentAcceptingOptionSpec<String> newSpec =
+        final ArgumentAcceptingOptionSpec<String> newSpec =
             new OptionalArgumentOptionSpec<String>( options(), description() );
         parser.recognize( newSpec );
 
@@ -109,9 +109,9 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @return self, so that the caller can add clauses to the fluent interface sentence
      * @throws OptionException if any of the dependent options haven't been configured in the parser yet
      */
-    public OptionSpecBuilder requiredIf( String dependent, String... otherDependents ) {
-        List<String> dependents = validatedDependents( dependent, otherDependents );
-        for ( String each : dependents ) {
+    public OptionSpecBuilder requiredIf( final String dependent, final String... otherDependents ) {
+        final List<String> dependents = validatedDependents( dependent, otherDependents );
+        for ( final String each : dependents ) {
             parser.requiredIf( options(), each );
         }
 
@@ -131,9 +131,9 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @param otherDependents other options whose presence on a command line makes this builder's option required
      * @return self, so that the caller can add clauses to the fluent interface sentence
      */
-    public OptionSpecBuilder requiredIf( OptionSpec<?> dependent, OptionSpec<?>... otherDependents ) {
+    public OptionSpecBuilder requiredIf( final OptionSpec<?> dependent, final OptionSpec<?>... otherDependents ) {
         parser.requiredIf( options(), dependent );
-        for ( OptionSpec<?> each : otherDependents )
+        for ( final OptionSpec<?> each : otherDependents )
             parser.requiredIf( options(), each );
 
         return this;
@@ -151,9 +151,9 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @return self, so that the caller can add clauses to the fluent interface sentence
      * @throws OptionException if any of the dependent options haven't been configured in the parser yet
      */
-    public OptionSpecBuilder requiredUnless( String dependent, String... otherDependents ) {
-        List<String> dependents = validatedDependents( dependent, otherDependents );
-        for ( String each : dependents ) {
+    public OptionSpecBuilder requiredUnless( final String dependent, final String... otherDependents ) {
+        final List<String> dependents = validatedDependents( dependent, otherDependents );
+        for ( final String each : dependents ) {
             parser.requiredUnless( options(), each );
         }
         return this;
@@ -172,20 +172,20 @@ public class OptionSpecBuilder extends NoArgumentOptionSpec {
      * @param otherDependents other options whose absence on a command line makes this builder's option required
      * @return self, so that the caller can add clauses to the fluent interface sentence
      */
-    public OptionSpecBuilder requiredUnless( OptionSpec<?> dependent, OptionSpec<?>... otherDependents ) {
+    public OptionSpecBuilder requiredUnless( final OptionSpec<?> dependent, final OptionSpec<?>... otherDependents ) {
         parser.requiredUnless( options(), dependent );
-        for ( OptionSpec<?> each : otherDependents )
+        for ( final OptionSpec<?> each : otherDependents )
             parser.requiredUnless( options(), each );
 
         return this;
     }
 
-    private List<String> validatedDependents( String dependent, String... otherDependents ) {
-        List<String> dependents = new ArrayList<String>();
+    private List<String> validatedDependents( final String dependent, final String... otherDependents ) {
+        final List<String> dependents = new ArrayList<String>();
         dependents.add( dependent );
         Collections.addAll( dependents, otherDependents );
 
-        for ( String each : dependents ) {
+        for ( final String each : dependents ) {
             if ( !parser.isRecognized( each ) )
                 throw new UnconfiguredOptionException( each );
         }

@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
 public class MultipleDelimitedArgumentsTest {
     @Test
     public void supportsMultipleDelimitedArguments() {
-        OptionParser parser = new OptionParser();
-        OptionSpec<File> path = parser.accepts( "path" ).withRequiredArg().ofType( File.class )
+        final OptionParser parser = new OptionParser();
+        final OptionSpec<File> path = parser.accepts( "path" ).withRequiredArg().ofType( File.class )
             .withValuesSeparatedBy( pathSeparatorChar );
 
-        OptionSet options = parser.parse( "--path", join( pathSeparatorChar, "/tmp", "/var", "/opt" ) );
+        final OptionSet options = parser.parse( "--path", join( pathSeparatorChar, "/tmp", "/var", "/opt" ) );
 
         assertTrue( options.has( path ) );
         assertTrue( options.hasArgument( path ) );

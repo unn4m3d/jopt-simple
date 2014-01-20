@@ -36,7 +36,7 @@ class ArgumentList {
     private final String[] arguments;
     private int currentIndex;
 
-    ArgumentList( String... arguments ) {
+    ArgumentList( final String... arguments ) {
         this.arguments = arguments.clone();
     }
 

@@ -37,10 +37,10 @@ import joptsimple.ValueConverter;
  * @author <a href="mailto:r@ymund.de">Raymund F\u00FCl\u00F6p</a>
  */
 public class InetAddressConverter implements ValueConverter<InetAddress> {
-    public InetAddress convert( String value ) {
+    public InetAddress convert( final String value ) {
         try {
             return InetAddress.getByName( value );
-        } catch ( UnknownHostException e ) {
+        } catch ( final UnknownHostException e ) {
             throw new ValueConversionException( "Cannot convert value [" + value + " into an InetAddress", e );
         }
     }

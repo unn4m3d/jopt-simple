@@ -65,10 +65,10 @@ public class ParsingSeparatedStringOptionValuesTest extends AbstractOptionParser
         assertCorrectParse( "c", ",", "-c,/usr,,,/opt,,,/var,,,,," );
     }
 
-    private void assertCorrectParse( String option, String separator, String... args ) {
+    private void assertCorrectParse( final String option, final String separator, final String... args ) {
         parser.accepts( option ).withRequiredArg().withValuesSeparatedBy( separator );
 
-        OptionSet options = parser.parse( args );
+        final OptionSet options = parser.parse( args );
 
         assertEquals( asList( "/usr", "/opt", "/var" ), options.valuesOf( option ) );
     }

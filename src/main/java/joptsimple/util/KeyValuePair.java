@@ -39,7 +39,7 @@ public final class KeyValuePair {
     public final String key;
     public final String value;
 
-    private KeyValuePair( String key, String value ) {
+    private KeyValuePair( final String key, final String value ) {
         this.key = key;
         this.value = value;
     }
@@ -51,23 +51,23 @@ public final class KeyValuePair {
      * @return a key-value pair
      * @throws NullPointerException if {@code stringRepresentation} is {@code null}
      */
-    public static KeyValuePair valueOf( String asString ) {
-        int equalsIndex = asString.indexOf( '=' );
+    public static KeyValuePair valueOf( final String asString ) {
+        final int equalsIndex = asString.indexOf( '=' );
         if ( equalsIndex == -1 )
             return new KeyValuePair( asString, EMPTY );
 
-        String aKey = asString.substring( 0, equalsIndex );
-        String aValue = equalsIndex == asString.length() - 1 ? EMPTY : asString.substring( equalsIndex + 1 );
+        final String aKey = asString.substring( 0, equalsIndex );
+        final String aValue = equalsIndex == asString.length() - 1 ? EMPTY : asString.substring( equalsIndex + 1 );
 
         return new KeyValuePair( aKey, aValue );
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         if ( !( that instanceof KeyValuePair ) )
             return false;
 
-        KeyValuePair other = (KeyValuePair) that;
+        final KeyValuePair other = (KeyValuePair) that;
         return key.equals( other.key ) && value.equals( other.value );
     }
 

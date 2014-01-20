@@ -74,8 +74,8 @@ public class OptionSynonymCommonPrefixesTest extends AbstractOptionParserFixture
         assertDetections( "-verbose" );
     }
 
-    private void assertDetections( String option ) {
-        OptionSet options = parser.parse( option );
+    private void assertDetections( final String option ) {
+        final OptionSet options = parser.parse( option );
 
         assertOptionDetected( options, "v" );
         assertOptionNotDetected( options, "ve" );

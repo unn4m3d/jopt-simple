@@ -37,13 +37,13 @@ import static org.junit.Assert.*;
 public class OptionSetDetectedOptionsTest extends AbstractOptionParserFixture {
     @Test
     public void givesSpecsInOrderOfCommandLinePresentation() {
-        OptionSpec<Void> a = parser.accepts( "a" );
-        OptionSpec<String> b = parser.accepts( "b" ).withRequiredArg();
-        OptionSpec<String> c = parser.accepts( "c" ).withOptionalArg();
-        OptionSpec<String> d = parser.accepts( "d" ).withRequiredArg().defaultsTo( "1" );
-        OptionSpec<String> e = parser.accepts( "e" ).withOptionalArg().defaultsTo( "2" );
+        final OptionSpec<Void> a = parser.accepts( "a" );
+        final OptionSpec<String> b = parser.accepts( "b" ).withRequiredArg();
+        final OptionSpec<String> c = parser.accepts( "c" ).withOptionalArg();
+        final OptionSpec<String> d = parser.accepts( "d" ).withRequiredArg().defaultsTo( "1" );
+        final OptionSpec<String> e = parser.accepts( "e" ).withOptionalArg().defaultsTo( "2" );
 
-        OptionSet options = parser.parse( "-a", "-e", "-c", "5", "-d", "6", "-b", "4", "-d", "7", "-e", "8" );
+        final OptionSet options = parser.parse( "-a", "-e", "-c", "5", "-d", "6", "-b", "4", "-d", "7", "-e", "8" );
 
         assertEquals( asList( a, e, c, d, b, d, e ), options.specs() );
     }

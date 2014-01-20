@@ -42,16 +42,16 @@ public class Rows {
     private int widthOfWidestOption;
     private int widthOfWidestDescription;
 
-    public Rows( int overallWidth, int columnSeparatorWidth ) {
+    public Rows( final int overallWidth, final int columnSeparatorWidth ) {
         this.overallWidth = overallWidth;
         this.columnSeparatorWidth = columnSeparatorWidth;
     }
 
-    public void add( String option, String description ) {
+    public void add( final String option, final String description ) {
         add( new Row( option, description ) );
     }
 
-    private void add( Row row ) {
+    private void add( final Row row ) {
         rows.add( row );
         widthOfWidestOption = max( widthOfWidestOption, row.option.length() );
         widthOfWidestDescription = max( widthOfWidestDescription, row.description.length() );
@@ -64,22 +64,22 @@ public class Rows {
     }
 
     public void fitToWidth() {
-        Columns columns = new Columns( optionWidth(), descriptionWidth() );
+        final Columns columns = new Columns( optionWidth(), descriptionWidth() );
 
-        Set<Row> fitted = new LinkedHashSet<Row>();
-        for ( Row each : rows )
+        final Set<Row> fitted = new LinkedHashSet<Row>();
+        for ( final Row each : rows )
             fitted.addAll( columns.fit( each ) );
 
         reset();
 
-        for ( Row each : fitted )
+        for ( final Row each : fitted )
             add( each );
     }
 
     public String render() {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
 
-        for ( Row each : rows ) {
+        for ( final Row each : rows ) {
             pad( buffer, each.option, optionWidth() ).append( repeat( ' ', columnSeparatorWidth ) );
             pad( buffer, each.description, descriptionWidth() ).append( LINE_SEPARATOR );
         }
@@ -95,7 +95,7 @@ public class Rows {
         return min( ( overallWidth - columnSeparatorWidth ) / 2, widthOfWidestDescription );
     }
 
-    private StringBuilder pad( StringBuilder buffer, String s, int length ) {
+    private StringBuilder pad( final StringBuilder buffer, final String s, final int length ) {
         buffer.append( s ).append( repeat( ' ', length - s.length() ) );
         return buffer;
     }

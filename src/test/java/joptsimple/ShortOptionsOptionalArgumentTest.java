@@ -47,7 +47,7 @@ public class ShortOptionsOptionalArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void optionWithOptionalArgumentNotPresent() {
-        OptionSet options = parser.parse( "-f" );
+        final OptionSet options = parser.parse( "-f" );
 
         assertOptionDetected(options, "f");
         assertEquals( emptyList(), options.valuesOf( "f" ) );
@@ -56,7 +56,7 @@ public class ShortOptionsOptionalArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void optionWithOptionalArgumentPresent() {
-        OptionSet options = parser.parse( "-f", "bar" );
+        final OptionSet options = parser.parse( "-f", "bar" );
 
         assertOptionDetected(options, "f");
         assertEquals( singletonList("bar"), options.valuesOf( "f" ) );
@@ -73,7 +73,7 @@ public class ShortOptionsOptionalArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void optionWithOptionalArgumentThatLooksLikeAValidOption() {
-        OptionSet options = parser.parse( "-f", "--bar" );
+        final OptionSet options = parser.parse( "-f", "--bar" );
 
         assertOptionDetected( options, "f" );
         assertOptionDetected( options, "bar" );
@@ -84,7 +84,7 @@ public class ShortOptionsOptionalArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void optionWithOptionalArgumentFollowedByLegalOption() {
-        OptionSet options = parser.parse( "-f", "-g" );
+        final OptionSet options = parser.parse( "-f", "-g" );
 
         assertOptionDetected( options, "f" );
         assertOptionDetected( options, "g" );
@@ -95,7 +95,7 @@ public class ShortOptionsOptionalArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void multipleOfSameOptionSomeWithArgsAndSomeWithout() {
-        OptionSet options = parser.parse( "-f", "-f", "foo", "-f", "-f", "bar", "-f" );
+        final OptionSet options = parser.parse( "-f", "-f", "foo", "-f", "-f", "bar", "-f" );
 
         assertEquals( asList( "foo", "bar" ), options.valuesOf("f") );
         assertEquals( emptyList(), options.nonOptionArguments() );

@@ -48,8 +48,8 @@ public class PunctuationInShortOptionTest {
         assertOptionAllowed( "." );
     }
 
-    private void assertOptionAllowed( String option ) {
-        OptionSet options = new OptionParser( option ).parse( '-' + option );
+    private void assertOptionAllowed( final String option ) {
+        final OptionSet options = new OptionParser( option ).parse( '-' + option );
 
         assertTrue( options.has( option ) );
     }

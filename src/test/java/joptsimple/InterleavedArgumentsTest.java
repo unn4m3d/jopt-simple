@@ -38,8 +38,8 @@ import static org.junit.Assert.*;
 public class InterleavedArgumentsTest {
     @Test
     public void onlyAppearingToHaveOptionArguments() {
-        OptionParser parser = new OptionParser( "c" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "c" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( emptyList(), options.valuesOf( "c" ) );
@@ -48,8 +48,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void onlyAppearingToHaveOptionArgumentsButPosixlyCorrect() {
-        OptionParser parser = new OptionParser( "+c" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "+c" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( emptyList(), options.valuesOf( "c" ) );
@@ -60,8 +60,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void requiredArgument() {
-        OptionParser parser = new OptionParser( "c:" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "c:" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( asList( "a", "b", "c", "d" ), options.valuesOf( "c" ) );
@@ -70,8 +70,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void requiredArgumentAndPosixlyCorrect() {
-        OptionParser parser = new OptionParser( "+c:" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "+c:" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( asList( "a", "b", "c", "d" ), options.valuesOf( "c" ) );
@@ -80,8 +80,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void optionalArgument() {
-        OptionParser parser = new OptionParser( "c::" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "c::" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( asList( "a", "b", "c", "d" ), options.valuesOf( "c" ) );
@@ -90,8 +90,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void optionalArgumentAndPosixlyCorrect() {
-        OptionParser parser = new OptionParser( "+c::" );
-        OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "+c::" );
+        final OptionSet options = parser.parse( "-c", "a", "-c", "b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( emptyList(), options.valuesOf( "c" ) );
@@ -100,9 +100,9 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void leadingNonOptionCausesPosixlyCorrectToIgnoreRemainder() {
-        OptionParser parser = new OptionParser( "+c:" );
-        String[] args = { "boo", "-c", "a", "-c", "b", "-c", "c", "-c", "d" };
-        OptionSet options = parser.parse( args );
+        final OptionParser parser = new OptionParser( "+c:" );
+        final String[] args = { "boo", "-c", "a", "-c", "b", "-c", "c", "-c", "d" };
+        final OptionSet options = parser.parse( args );
 
         assertFalse( options.has( "c" ) );
         assertEquals( emptyList(), options.valuesOf( "c" ) );
@@ -111,8 +111,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void optionalAbuttedArgumentVersusPosixlyCorrect() {
-        OptionParser parser = new OptionParser( "+c::" );
-        OptionSet options = parser.parse( "-ca", "-cb", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "+c::" );
+        final OptionSet options = parser.parse( "-ca", "-cb", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( asList( "a", "b" ), options.valuesOf( "c" ) );
@@ -121,8 +121,8 @@ public class InterleavedArgumentsTest {
 
     @Test
     public void optionalKeyValuePairArgumentVersusPosixlyCorrect() {
-        OptionParser parser = new OptionParser( "+c::" );
-        OptionSet options = parser.parse( "-c=a", "-c=b", "-c", "c", "-c", "d" );
+        final OptionParser parser = new OptionParser( "+c::" );
+        final OptionSet options = parser.parse( "-c=a", "-c=b", "-c", "c", "-c", "d" );
 
         assertTrue( options.has( "c" ) );
         assertEquals( asList( "a", "b" ), options.valuesOf( "c" ) );

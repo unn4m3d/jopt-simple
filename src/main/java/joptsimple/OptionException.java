@@ -44,11 +44,11 @@ public abstract class OptionException extends RuntimeException {
 
     private final List<String> options = new ArrayList<String>();
 
-    protected OptionException( Collection<String> options ) {
+    protected OptionException( final Collection<String> options ) {
         this.options.addAll( options );
     }
 
-    protected OptionException( Collection<String> options, Throwable cause ) {
+    protected OptionException( final Collection<String> options, final Throwable cause ) {
         super( cause );
 
         this.options.addAll( options );
@@ -67,14 +67,14 @@ public abstract class OptionException extends RuntimeException {
         return singleOptionMessage( options.get( 0 ) );
     }
 
-    protected final String singleOptionMessage( String option ) {
+    protected final String singleOptionMessage( final String option ) {
         return SINGLE_QUOTE + option + SINGLE_QUOTE;
     }
 
     protected final String multipleOptionMessage() {
-        StringBuilder buffer = new StringBuilder( "[" );
+        final StringBuilder buffer = new StringBuilder( "[" );
 
-        for ( Iterator<String> iter = options.iterator(); iter.hasNext(); ) {
+        for ( final Iterator<String> iter = options.iterator(); iter.hasNext(); ) {
             buffer.append( singleOptionMessage( iter.next() ) );
             if ( iter.hasNext() )
                 buffer.append( ", " );
@@ -85,7 +85,7 @@ public abstract class OptionException extends RuntimeException {
         return buffer.toString();
     }
 
-    static OptionException unrecognizedOption( String option ) {
+    static OptionException unrecognizedOption( final String option ) {
         return new UnrecognizedOptionException( option );
     }
 }

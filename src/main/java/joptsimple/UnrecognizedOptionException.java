@@ -35,7 +35,7 @@ import static java.util.Collections.*;
 class UnrecognizedOptionException extends OptionException {
     private static final long serialVersionUID = -1L;
 
-    UnrecognizedOptionException( String option ) {
+    UnrecognizedOptionException( final String option ) {
         super( singletonList( option ) );
     }
 

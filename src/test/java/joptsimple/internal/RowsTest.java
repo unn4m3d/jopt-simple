@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 public class RowsTest {
     @Test
     public void optionsAndDescriptionsWithinOverallWidth() {
-        Rows rows = new Rows( 40, 2 );
+        final Rows rows = new Rows( 40, 2 );
         rows.add( "left one", "right one" );
         rows.add( "another left one", "another right one" );
 
@@ -47,7 +47,7 @@ public class RowsTest {
 
     @Test
     public void someOptionsExceedOverallWidth() {
-        Rows rows = new Rows( 40, 2 );
+        final Rows rows = new Rows( 40, 2 );
         rows.add( "left one is pretty freaking long to be over here", "right one" );
         rows.add( "another left one also has length that is quite excessive", "another right one" );
 
@@ -63,7 +63,7 @@ public class RowsTest {
 
     @Test
     public void someDescriptionsExceedOverallWidth() {
-        Rows rows = new Rows( 40, 2 );
+        final Rows rows = new Rows( 40, 2 );
         rows.add( "left one", "right one for the time we have chosen" );
         rows.add( "another left one", "another right one could be used here instead" );
 
@@ -76,7 +76,7 @@ public class RowsTest {
                 "                    here instead   " );
     }
 
-    private void assertRows( Rows rows, String... expected ) {
+    private void assertRows( final Rows rows, final String... expected ) {
         rows.fitToWidth();
 
         assertEquals( join( expected, LINE_SEPARATOR ) + LINE_SEPARATOR, rows.render() );

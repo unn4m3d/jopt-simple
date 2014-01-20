@@ -43,7 +43,7 @@ public class OptionExceptionMessageTest {
     private final OptionException subject;
     private final String expectedMessage;
 
-    public OptionExceptionMessageTest( OptionException subject, String expectedMessage ) {
+    public OptionExceptionMessageTest( final OptionException subject, final String expectedMessage ) {
         this.subject = subject;
         this.expectedMessage = expectedMessage;
     }

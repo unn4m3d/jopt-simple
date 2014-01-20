@@ -38,11 +38,11 @@ import static joptsimple.internal.Reflection.*;
 class ConstructorInvokingValueConverter<V> implements ValueConverter<V> {
     private final Constructor<V> ctor;
 
-    ConstructorInvokingValueConverter( Constructor<V> ctor ) {
+    ConstructorInvokingValueConverter( final Constructor<V> ctor ) {
         this.ctor = ctor;
     }
 
-    public V convert( String value ) {
+    public V convert( final String value ) {
         return instantiate( ctor, value );
     }
 

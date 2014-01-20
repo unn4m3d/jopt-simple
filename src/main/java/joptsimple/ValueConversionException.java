@@ -38,7 +38,7 @@ public class ValueConversionException extends RuntimeException {
      *
      * @param message the detail message
      */
-    public ValueConversionException( String message ) {
+    public ValueConversionException( final String message ) {
         this( message, null );
     }
 
@@ -48,7 +48,7 @@ public class ValueConversionException extends RuntimeException {
      * @param message the detail message
      * @param cause the original exception
      */
-    public ValueConversionException( String message, Throwable cause ) {
+    public ValueConversionException( final String message, final Throwable cause ) {
         super( message, cause );
     }
 }

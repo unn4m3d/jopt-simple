@@ -47,7 +47,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void singleOption() {
-        OptionSet options = parser.parse( "-a" );
+        final OptionSet options = parser.parse( "-a" );
 
         assertOptionDetected( options, "a" );
         assertNull( options.valueOf( "a" ) );
@@ -56,7 +56,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void twoSingleOptions() {
-        OptionSet options = parser.parse( "-a", "-b" );
+        final OptionSet options = parser.parse( "-a", "-b" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -67,7 +67,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void singleOptionWithOneNonOptionArgument() {
-        OptionSet options = parser.parse( "-c", "foo" );
+        final OptionSet options = parser.parse( "-c", "foo" );
 
         assertOptionDetected( options, "c" );
         assertNull( options.valueOf( "c" ) );
@@ -76,7 +76,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void clusteredOptions() {
-        OptionSet options = parser.parse( "-bac" );
+        final OptionSet options = parser.parse( "-bac" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -89,7 +89,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void optionsTerminator() {
-        OptionSet options = parser.parse( "-a", OPTION_TERMINATOR, "-a", "-b" );
+        final OptionSet options = parser.parse( "-a", OPTION_TERMINATOR, "-a", "-b" );
 
         assertOptionDetected( options, "a" );
         assertNull( options.valueOf( "a" ) );
@@ -99,7 +99,7 @@ public class ShortOptionsNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void appearingMultipleTimes() {
-        OptionSet options = parser.parse( "-b", "-b", "-b" );
+        final OptionSet options = parser.parse( "-b", "-b", "-b" );
 
         assertOptionDetected( options, "b" );
         assertNull( options.valueOf( "b" ) );

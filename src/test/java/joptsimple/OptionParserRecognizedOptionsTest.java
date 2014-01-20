@@ -43,7 +43,7 @@ public class OptionParserRecognizedOptionsTest extends AbstractOptionParserFixtu
         parser.accepts( "second" ).withOptionalArg();
         parser.accepts( "third" ).forHelp();
 
-        Map<String, ? extends OptionSpec<?>> recognizedOptions = parser.recognizedOptions();
+        final Map<String, ? extends OptionSpec<?>> recognizedOptions = parser.recognizedOptions();
 
         assertEquals( 4, recognizedOptions.size() );
         assertTrue( recognizedOptions.keySet().contains( "first" ) );

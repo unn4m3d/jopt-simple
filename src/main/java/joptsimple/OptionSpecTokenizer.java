@@ -41,7 +41,7 @@ class OptionSpecTokenizer {
     private String specification;
     private int index;
 
-    OptionSpecTokenizer( String specification ) {
+    OptionSpecTokenizer( final String specification ) {
         if ( specification == null )
             throw new NullPointerException( "null option specification" );
 
@@ -57,7 +57,7 @@ class OptionSpecTokenizer {
             throw new NoSuchElementException();
 
 
-        String optionCandidate = String.valueOf( specification.charAt( index ) );
+        final String optionCandidate = String.valueOf( specification.charAt( index ) );
         index++;
 
         AbstractOptionSpec<?> spec;
@@ -87,14 +87,14 @@ class OptionSpecTokenizer {
         return spec;
     }
 
-    void configure( OptionParser parser ) {
+    void configure( final OptionParser parser ) {
         adjustForPosixlyCorrect( parser );
 
         while ( hasMore() )
             parser.recognize( next() );
     }
 
-    private void adjustForPosixlyCorrect( OptionParser parser ) {
+    private void adjustForPosixlyCorrect( final OptionParser parser ) {
         if ( POSIXLY_CORRECT_MARKER == specification.charAt( 0 ) ) {
             parser.posixlyCorrect( true );
             specification = specification.substring( 1 );
@@ -113,7 +113,7 @@ class OptionSpecTokenizer {
         return null;
     }
 
-    private AbstractOptionSpec<?> handleArgumentAcceptingOption( String candidate ) {
+    private AbstractOptionSpec<?> handleArgumentAcceptingOption( final String candidate ) {
         index++;
 
         if ( hasMore() && specification.charAt( index ) == ':' ) {

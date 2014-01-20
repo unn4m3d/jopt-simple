@@ -66,12 +66,12 @@ public class DateConverterTest {
             }
 
             @Override
-            public StringBuffer format( Date date, StringBuffer toAppendTo, FieldPosition fieldPosition ) {
+            public StringBuffer format( final Date date, final StringBuffer toAppendTo, final FieldPosition fieldPosition ) {
                 return null;
             }
 
             @Override
-            public Date parse( String source, ParsePosition pos ) {
+            public Date parse( final String source, final ParsePosition pos ) {
                 return null;
             }
         };
@@ -86,7 +86,7 @@ public class DateConverterTest {
 
     @Test
     public void shouldConvertValuesToDatesUsingADateFormat() {
-        ValueConverter<Date> converter = new DateConverter( monthDayYear );
+        final ValueConverter<Date> converter = new DateConverter( monthDayYear );
 
         assertEquals( new DateMidnight( 2009, 1, 24 ).toDate(), converter.convert( "01/24/2009" ) );
     }

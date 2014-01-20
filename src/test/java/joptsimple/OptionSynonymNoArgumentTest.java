@@ -57,8 +57,8 @@ public class OptionSynonymNoArgumentTest extends AbstractOptionParserFixture {
         assertDetections( "--n" );
     }
 
-    private void assertDetections( String option ) {
-        OptionSet options = parser.parse( option );
+    private void assertDetections( final String option ) {
+        final OptionSet options = parser.parse( option );
 
         assertOptionDetected( options, "N" );
         assertOptionDetected( options, "after-date" );

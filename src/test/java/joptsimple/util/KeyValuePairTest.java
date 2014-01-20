@@ -40,7 +40,7 @@ public class KeyValuePairTest {
 
     @Test
     public void empty() {
-        KeyValuePair pair = KeyValuePair.valueOf( "" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "" );
 
         assertEquals( "", pair.key );
         assertEquals( "", pair.value );
@@ -48,7 +48,7 @@ public class KeyValuePairTest {
 
     @Test
     public void noEqualsSign() {
-        KeyValuePair pair = KeyValuePair.valueOf( "aString" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "aString" );
 
         assertEquals( "aString", pair.key );
         assertEquals( "", pair.value );
@@ -56,7 +56,7 @@ public class KeyValuePairTest {
 
     @Test
     public void signAtEnd() {
-        KeyValuePair pair = KeyValuePair.valueOf( "aKey=" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "aKey=" );
 
         assertEquals( "aKey", pair.key );
         assertEquals( "", pair.value );
@@ -64,7 +64,7 @@ public class KeyValuePairTest {
 
     @Test
     public void signAtStart() {
-        KeyValuePair pair = KeyValuePair.valueOf( "=aValue" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "=aValue" );
 
         assertEquals( "", pair.key );
         assertEquals( "aValue", pair.value );
@@ -72,7 +72,7 @@ public class KeyValuePairTest {
 
     @Test
     public void typical() {
-        KeyValuePair pair = KeyValuePair.valueOf( "aKey=aValue" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "aKey=aValue" );
 
         assertEquals( "aKey", pair.key );
         assertEquals( "aValue", pair.value );
@@ -80,7 +80,7 @@ public class KeyValuePairTest {
 
     @Test
     public void multipleEqualsSignsDoNotMatter() {
-        KeyValuePair pair = KeyValuePair.valueOf( "aKey=1=2=3=4" );
+        final KeyValuePair pair = KeyValuePair.valueOf( "aKey=1=2=3=4" );
 
         assertEquals( "aKey", pair.key );
         assertEquals( "1=2=3=4", pair.value );

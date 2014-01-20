@@ -32,7 +32,7 @@ import static joptsimple.ParserRules.*;
  */
 public class AlternativeLongOptionSpecOptionsImmutabilityTest extends AbstractOptionSpecOptionsImmutabilityTestCase {
     @Override
-    protected AbstractOptionSpec<?> newOptionSpec( String option ) {
+    protected AbstractOptionSpec<?> newOptionSpec( final String option ) {
         return new AlternativeLongOptionSpec();
     }
 

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class RequiredOptionsTest {
     @Test( expected = OptionException.class )
     public void allowsSpecificationOfRequiredOptions() {
-        OptionParser parser = new OptionParser() {
+        final OptionParser parser = new OptionParser() {
             {
                 accepts( "userid" ).withRequiredArg().required();
                 accepts( "password" ).withRequiredArg().required();
@@ -22,7 +22,7 @@ public class RequiredOptionsTest {
 
     @Test
     public void aHelpOptionMeansRequiredOptionsNeedNotBePresent() {
-        OptionParser parser = new OptionParser() {
+        final OptionParser parser = new OptionParser() {
             {
                 accepts( "userid" ).withRequiredArg().required();
                 accepts( "password" ).withRequiredArg().required();
@@ -30,13 +30,13 @@ public class RequiredOptionsTest {
             }
         };
 
-        OptionSet options = parser.parse( "--help" );
+        final OptionSet options = parser.parse( "--help" );
         assertTrue( options.has( "help" ) );
     }
-    
+
     @Test( expected = OptionException.class )
     public void missingHelpOptionMeansRequiredOptionsMustBePresent() {
-        OptionParser parser = new OptionParser() {
+        final OptionParser parser = new OptionParser() {
             {
                 accepts( "userid" ).withRequiredArg().required();
                 accepts( "password" ).withRequiredArg().required();

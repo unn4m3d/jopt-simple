@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
 public class SignallingEndOfOptionsTest {
     @Test
     public void doubleHyphenSignalsEndOfOptions() {
-        OptionParser parser = new OptionParser( "ab:c::de:f::" );
+        final OptionParser parser = new OptionParser( "ab:c::de:f::" );
 
-        OptionSet options = parser.parse( "-a", "-b=foo", "-c=bar", "--", "-d", "-e", "baz", "-f", "biz" );
+        final OptionSet options = parser.parse( "-a", "-b=foo", "-c=bar", "--", "-d", "-e", "baz", "-f", "biz" );
 
         assertTrue( options.has( "a" ) );
         assertFalse( options.hasArgument( "a" ) );

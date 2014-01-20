@@ -45,7 +45,7 @@ public class JVMSystemPropertiesArgumentParsingTest extends AbstractOptionParser
 
     @Test
     public void parsingJVMSystemPropertiesArguments() {
-        OptionSet options = parser.parse( "-Dfile.encoding=UTF-8", "-Dpath.separator=:" );
+        final OptionSet options = parser.parse( "-Dfile.encoding=UTF-8", "-Dpath.separator=:" );
         assertEquals(
             asList( valueOf( "file.encoding=UTF-8" ), valueOf( "path.separator=:" ) ),
             options.valuesOf( "D" ) );

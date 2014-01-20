@@ -44,7 +44,7 @@ public class WAsAbbreviationForLongOptionTest extends AbstractOptionParserFixtur
 
     @Test
     public void abbreviation() {
-        OptionSet options = parser.parse( "--W", "silent" );
+        final OptionSet options = parser.parse( "--W", "silent" );
 
         assertOptionDetected( options, "Wally" );
         assertOptionNotDetected( options, "W" );

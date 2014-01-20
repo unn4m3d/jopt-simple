@@ -45,7 +45,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void foxPermutation() {
-        OptionSet options = parser.parse( "-fox" );
+        final OptionSet options = parser.parse( "-fox" );
 
         assertTrue( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -56,7 +56,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void fxoPermutation() {
-        OptionSet options = parser.parse( "-fxo" );
+        final OptionSet options = parser.parse( "-fxo" );
 
         assertTrue( options.has( "f" ) );
         assertFalse( options.has( "o" ) );
@@ -67,7 +67,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void ofxPermutation() {
-        OptionSet options = parser.parse( "-ofx" );
+        final OptionSet options = parser.parse( "-ofx" );
 
         assertFalse( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -78,7 +78,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void oxfPermutation() {
-        OptionSet options = parser.parse( "-oxf" );
+        final OptionSet options = parser.parse( "-oxf" );
 
         assertFalse( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -89,7 +89,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void xofPermutation() {
-        OptionSet options = parser.parse( "-xof" );
+        final OptionSet options = parser.parse( "-xof" );
 
         assertFalse( options.has( "f" ) );
         assertFalse( options.has( "o" ) );
@@ -100,7 +100,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void xfoPermutation() {
-        OptionSet options = parser.parse( "-xfo" );
+        final OptionSet options = parser.parse( "-xfo" );
 
         assertFalse( options.has( "f" ) );
         assertFalse( options.has( "o" ) );
@@ -111,7 +111,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void foxPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-fox", "bar" );
+        final OptionSet options = parser.parse( "-fox", "bar" );
 
         assertTrue( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -123,7 +123,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void fxoPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-fxo", "bar" );
+        final OptionSet options = parser.parse( "-fxo", "bar" );
 
         assertTrue( options.has( "f" ) );
         assertFalse( options.has( "o" ) );
@@ -135,7 +135,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void ofxPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-ofx", "bar" );
+        final OptionSet options = parser.parse( "-ofx", "bar" );
 
         assertFalse( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -147,7 +147,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void oxfPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-oxf", "bar" );
+        final OptionSet options = parser.parse( "-oxf", "bar" );
 
         assertFalse( options.has( "f" ) );
         assertTrue( options.has( "o" ) );
@@ -159,7 +159,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void xofPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-xof", "bar" );
+        final OptionSet options = parser.parse( "-xof", "bar" );
 
         assertFalse( options.has( "f" ) );
         assertFalse( options.has( "o" ) );
@@ -171,7 +171,7 @@ public class ClusterWhereManyOptionsAcceptArgumentsTest extends AbstractOptionPa
 
     @Test
     public void xfoPermutationWithFollowingArg() {
-        OptionSet options = parser.parse( "-xfo", "bar" );
+        final OptionSet options = parser.parse( "-xfo", "bar" );
 
         assertFalse( options.has( "f" ) );
         assertFalse( options.has( "o" ) );

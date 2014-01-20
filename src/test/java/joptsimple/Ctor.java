@@ -29,9 +29,9 @@ package joptsimple;
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
 public class Ctor {
-    private String s;
+    private final String s;
 
-    public Ctor( String s ) {
+    public Ctor( final String s ) {
         this.s = s;
     }
 
@@ -39,7 +39,7 @@ public class Ctor {
         return s;
     }
 
-    static Ctor valueOf( String s ) {
+    static Ctor valueOf( final String s ) {
         return new Ctor( s );
     }
 }

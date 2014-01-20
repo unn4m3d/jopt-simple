@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 public class CreateWithOptionSpecificationStringTest {
     @Test
     public void createsParserWithOptionSpecificationString() {
-        OptionParser first = new OptionParser() {
+        final OptionParser first = new OptionParser() {
             {
                 accepts( "i" ).withOptionalArg();
                 accepts( "j" ).withRequiredArg();
@@ -43,9 +43,9 @@ public class CreateWithOptionSpecificationStringTest {
             }
         };
 
-        OptionParser second = new OptionParser( "i::j:k" );
+        final OptionParser second = new OptionParser( "i::j:k" );
 
-        String[] args = { "-k", "-ifoo", "-jbar" };
+        final String[] args = { "-k", "-ifoo", "-jbar" };
         assertEquals( first.parse( args ), second.parse( args ) );
     }
 }

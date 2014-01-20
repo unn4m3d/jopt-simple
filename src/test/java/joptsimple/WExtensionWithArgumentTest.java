@@ -45,7 +45,7 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void separateArgument() {
-        OptionSet options = parser.parse( "-W", "silent", "4" );
+        final OptionSet options = parser.parse( "-W", "silent", "4" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "silent" );
@@ -55,7 +55,7 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void togetherArgument() {
-        OptionSet options = parser.parse( "-W", "silent=6" );
+        final OptionSet options = parser.parse( "-W", "silent=6" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "silent" );
@@ -65,7 +65,7 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void abbreviationWithTogetherArgument() {
-        OptionSet options = parser.parse( "-W", "s=6" );
+        final OptionSet options = parser.parse( "-W", "s=6" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "silent" );
@@ -92,9 +92,9 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void typedTogetherArg() {
-        OptionSpec<Integer> level = parser.accepts( "level" ).withRequiredArg().ofType( Integer.class );
+        final OptionSpec<Integer> level = parser.accepts( "level" ).withRequiredArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-W", "level=4" );
+        final OptionSet options = parser.parse( "-W", "level=4" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "level" );
@@ -104,9 +104,9 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void typedSeparateArg() {
-        OptionSpec<Integer> floor = parser.accepts( "floor" ).withRequiredArg().ofType( Integer.class );
+        final OptionSpec<Integer> floor = parser.accepts( "floor" ).withRequiredArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-W", "floor", "5" );
+        final OptionSet options = parser.parse( "-W", "floor", "5" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "floor" );

@@ -42,7 +42,7 @@ class AlternativeLongOptionSpec extends ArgumentAcceptingOptionSpec<String> {
     }
 
     @Override
-    protected void detectOptionArgument( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions ) {
+    protected void detectOptionArgument( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions ) {
         if ( !arguments.hasMore() )
             throw new OptionMissingRequiredArgumentException( options() );
 

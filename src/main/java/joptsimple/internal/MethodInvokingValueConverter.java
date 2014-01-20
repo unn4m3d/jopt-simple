@@ -39,12 +39,12 @@ class MethodInvokingValueConverter<V> implements ValueConverter<V> {
     private final Method method;
     private final Class<V> clazz;
 
-    MethodInvokingValueConverter( Method method, Class<V> clazz ) {
+    MethodInvokingValueConverter( final Method method, final Class<V> clazz ) {
         this.method = method;
         this.clazz = clazz;
     }
 
-    public V convert( String value ) {
+    public V convert( final String value ) {
         return clazz.cast( invoke( method, value ) );
     }
 

@@ -404,7 +404,7 @@ public class ConfigurableOptionParserHelpTest extends AbstractOptionParserFixtur
 
     @Test
     public void leavesEmbeddedNewlinesInDescriptionsAlone() throws Exception {
-        List<String> descriptionPieces =
+        final List<String> descriptionPieces =
                 asList( "Specify the output type.", "'raw' = raw data.", "'java' = java class" );
         parser.accepts( "type", join( descriptionPieces, LINE_SEPARATOR ) );
 
@@ -503,7 +503,7 @@ public class ConfigurableOptionParserHelpTest extends AbstractOptionParserFixtur
                 EMPTY );
     }
 
-    private void assertHelpLines( String... expectedLines ) {
+    private void assertHelpLines( final String... expectedLines ) {
         assertEquals( join( expectedLines, LINE_SEPARATOR ), sink.toString() );
     }
 }

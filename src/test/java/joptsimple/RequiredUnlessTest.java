@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
 public class RequiredUnlessTest extends AbstractOptionParserFixture {
     @Before
     public void configureParser() {
-        OptionSpec<Void> anonymous = parser.accepts( "anonymous" );
+        final OptionSpec<Void> anonymous = parser.accepts( "anonymous" );
         parser.acceptsAll( asList( "username", "userid" ) ).requiredUnless( "anonymous" ).withRequiredArg();
         parser.acceptsAll( asList( "password", "pwd" ) ).requiredUnless( anonymous ).withRequiredArg();
         parser.accepts( "?" ).forHelp();
@@ -58,7 +58,7 @@ public class RequiredUnlessTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsCommandLineWithConditionallyRequiredOptionsPresent() {
-        OptionSet options = parser.parse( "--userid", "joe", "--password=secret" );
+        final OptionSet options = parser.parse( "--userid", "joe", "--password=secret" );
 
         assertOptionNotDetected( options, "anonymous" );
         assertOptionDetected( options, "username" );
@@ -70,7 +70,7 @@ public class RequiredUnlessTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsOptionWithPrerequisite() {
-        OptionSet options = parser.parse( "--anonymous" );
+        final OptionSet options = parser.parse( "--anonymous" );
 
         assertOptionDetected( options, "anonymous" );
         assertEquals( emptyList(), options.nonOptionArguments() );
@@ -78,7 +78,7 @@ public class RequiredUnlessTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsOptionWithPrerequisiteAsNormal() {
-        OptionSet options = parser.parse( "--anonymous", "--pwd", "secret" );
+        final OptionSet options = parser.parse( "--anonymous", "--pwd", "secret" );
 
         assertOptionDetected( options, "anonymous" );
         assertOptionDetected( options, "pwd" );
@@ -102,7 +102,7 @@ public class RequiredUnlessTest extends AbstractOptionParserFixture {
 
     @Test
     public void presenceOfHelpOptionNegatesRequiredUnlessness() {
-        OptionSet options = parser.parse( "-?" );
+        final OptionSet options = parser.parse( "-?" );
 
         assertOptionDetected( options, "?" );
         assertEquals( emptyList(), options.nonOptionArguments() );

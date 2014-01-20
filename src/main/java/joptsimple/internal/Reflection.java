@@ -52,38 +52,38 @@ public final class Reflection {
      * @param clazz class to introspect on
      * @return a converter method or constructor
      */
-    public static <V> ValueConverter<V> findConverter( Class<V> clazz ) {
-        Class<V> maybeWrapper = wrapperOf( clazz );
+    public static <V> ValueConverter<V> findConverter( final Class<V> clazz ) {
+        final Class<V> maybeWrapper = wrapperOf( clazz );
 
-        ValueConverter<V> valueOf = valueOfConverter( maybeWrapper );
+        final ValueConverter<V> valueOf = valueOfConverter( maybeWrapper );
         if ( valueOf != null )
             return valueOf;
 
-        ValueConverter<V> constructor = constructorConverter( maybeWrapper );
+        final ValueConverter<V> constructor = constructorConverter( maybeWrapper );
         if ( constructor != null )
             return constructor;
 
         throw new IllegalArgumentException( clazz + " is not a value type" );
     }
 
-    private static <V> ValueConverter<V> valueOfConverter( Class<V> clazz ) {
+    private static <V> ValueConverter<V> valueOfConverter( final Class<V> clazz ) {
         try {
-            Method valueOf = clazz.getDeclaredMethod( "valueOf", String.class );
+            final Method valueOf = clazz.getDeclaredMethod( "valueOf", String.class );
             if ( meetsConverterRequirements( valueOf, clazz ) )
                 return new MethodInvokingValueConverter<V>( valueOf, clazz );
 
             return null;
         }
-        catch ( NoSuchMethodException ignored ) {
+        catch ( final NoSuchMethodException ignored ) {
             return null;
         }
     }
 
-    private static <V> ValueConverter<V> constructorConverter( Class<V> clazz ) {
+    private static <V> ValueConverter<V> constructorConverter( final Class<V> clazz ) {
         try {
             return new ConstructorInvokingValueConverter<V>( clazz.getConstructor( String.class ) );
         }
-        catch ( NoSuchMethodException ignored ) {
+        catch ( final NoSuchMethodException ignored ) {
             return null;
         }
     }
@@ -97,11 +97,11 @@ public final class Reflection {
      * @return the result of invoking the constructor
      * @throws ReflectionException in lieu of the gaggle of reflection-related exceptions
      */
-    public static <T> T instantiate( Constructor<T> constructor, Object... args ) {
+    public static <T> T instantiate( final Constructor<T> constructor, final Object... args ) {
         try {
             return constructor.newInstance( args );
         }
-        catch ( Exception ex ) {
+        catch ( final Exception ex ) {
             throw reflectionException( ex );
         }
     }
@@ -114,26 +114,26 @@ public final class Reflection {
      * @return the result of invoking the method
      * @throws ReflectionException in lieu of the gaggle of reflection-related exceptions
      */
-    public static Object invoke( Method method, Object... args ) {
+    public static Object invoke( final Method method, final Object... args ) {
         try {
             return method.invoke( null, args );
         }
-        catch ( Exception ex ) {
+        catch ( final Exception ex ) {
             throw reflectionException( ex );
         }
     }
 
     @SuppressWarnings( "unchecked" )
-    public static <V> V convertWith( ValueConverter<V> converter, String raw ) {
+    public static <V> V convertWith( final ValueConverter<V> converter, final String raw ) {
         return converter == null ? (V) raw : converter.convert( raw );
     }
 
-    private static boolean meetsConverterRequirements( Method method, Class<?> expectedReturnType ) {
-        int modifiers = method.getModifiers();
+    private static boolean meetsConverterRequirements( final Method method, final Class<?> expectedReturnType ) {
+        final int modifiers = method.getModifiers();
         return isPublic( modifiers ) && isStatic( modifiers ) && expectedReturnType.equals( method.getReturnType() );
     }
 
-    private static RuntimeException reflectionException( Exception ex ) {
+    private static RuntimeException reflectionException( final Exception ex ) {
         if ( ex instanceof IllegalArgumentException )
             return new ReflectionException( ex );
         if ( ex instanceof InvocationTargetException )

@@ -39,7 +39,7 @@ public final class Objects {
      * @param target reference to check
      * @throws NullPointerException if {@code target} is {@code null}
      */
-    public static void ensureNotNull( Object target ) {
+    public static void ensureNotNull( final Object target ) {
         if ( target == null )
             throw new NullPointerException();
     }

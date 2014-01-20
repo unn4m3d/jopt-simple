@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 public class LongOptionsWithArgumentsTest {
     @Test
     public void supportsLongOptionsWithArgumentsAndAbbreviations() {
-        OptionParser parser = new OptionParser();
+        final OptionParser parser = new OptionParser();
         parser.accepts( "flag" );
         parser.accepts( "count" ).withRequiredArg();
         parser.accepts( "level" ).withOptionalArg();
 
-        OptionSet options = parser.parse( "-flag", "--co", "3", "--lev" );
+        final OptionSet options = parser.parse( "-flag", "--co", "3", "--lev" );
 
         assertTrue( options.has( "flag" ) );
 

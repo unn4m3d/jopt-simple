@@ -45,15 +45,15 @@ public abstract class AbstractOptionParserFixture {
         parser = new OptionParser();
     }
 
-    static void assertOptionDetected( OptionSet detectedOptions, String option ) {
+    static void assertOptionDetected( final OptionSet detectedOptions, final String option ) {
         assertTrue( "option '" + option + "' not detected?", detectedOptions.has( option ) );
     }
 
-    static void assertOptionNotDetected( OptionSet detectedOptions, String option ) {
+    static void assertOptionNotDetected( final OptionSet detectedOptions, final String option ) {
         assertOptionNotDetected( "option '" + option + "' detected?", detectedOptions, option );
     }
 
-    static void assertOptionNotDetected( String message, OptionSet detectedOptions, String option ) {
+    static void assertOptionNotDetected( final String message, final OptionSet detectedOptions, final String option ) {
         assertFalse( message, detectedOptions.has( option ) );
     }
 }

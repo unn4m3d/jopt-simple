@@ -57,10 +57,10 @@ public class ParsingSeparatedTypedOptionValuesTest extends AbstractOptionParserF
         assertCorrectParse( "c", ':', "-c/usr:/opt:/var" );
     }
 
-    private void assertCorrectParse( String option, char separator, String... args ) {
+    private void assertCorrectParse( final String option, final char separator, final String... args ) {
         parser.accepts( option ).withRequiredArg().ofType( File.class ).withValuesSeparatedBy( separator );
 
-        OptionSet options = parser.parse( args );
+        final OptionSet options = parser.parse( args );
 
         assertEquals(
             asList( new File( "/usr" ), new File( "/opt" ), new File( "/var" ) ),

@@ -63,7 +63,7 @@ public class ArgumentListTest {
         assertNoMoreArguments();
     }
 
-    private void assertNextArgumentIs( String expectedArg ) {
+    private void assertNextArgumentIs( final String expectedArg ) {
         assertTrue( "no more arguments?", args.hasMore() );
         assertEquals( "peek?", expectedArg, args.peek() );
         assertEquals( "next?", expectedArg, args.next() );

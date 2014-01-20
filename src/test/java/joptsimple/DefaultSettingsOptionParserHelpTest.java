@@ -283,7 +283,7 @@ public class DefaultSettingsOptionParserHelpTest extends AbstractOptionParserFix
 
     @Test
     public void writingToOutputStream() throws Exception {
-        ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
+        final ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
 
         parser.printHelpOn( bytesOut );
 
@@ -293,7 +293,7 @@ public class DefaultSettingsOptionParserHelpTest extends AbstractOptionParserFix
     // Bug 1956418
     @Test
     public void outputStreamFlushedButNotClosedWhenPrintingHelp() throws Exception {
-        FakeOutputStream fake = new FakeOutputStream();
+        final FakeOutputStream fake = new FakeOutputStream();
 
         parser.printHelpOn( fake );
 
@@ -469,7 +469,7 @@ public class DefaultSettingsOptionParserHelpTest extends AbstractOptionParserFix
 
     @Test
     public void leavesEmbeddedNewlinesInDescriptionsAlone() throws Exception {
-        List<String> descriptionPieces =
+        final List<String> descriptionPieces =
             asList( "Specify the output type.", "'raw' = raw data.", "'java' = java class" );
         parser.accepts( "type", join( descriptionPieces, LINE_SEPARATOR ) );
 
@@ -641,9 +641,9 @@ public class DefaultSettingsOptionParserHelpTest extends AbstractOptionParserFix
 
         parser.formatHelpWith( new HelpFormatter() {
             public String format( final OptionParser optionParser ) {
-                Map<String, ? extends OptionDescriptor> options = optionParser.recognizedOptions();
+                final Map<String, ? extends OptionDescriptor> options = optionParser.recognizedOptions();
                 assertEquals( 1, options.size() );
-                OptionDescriptor only = options.get( "f" );
+                final OptionDescriptor only = options.get( "f" );
                 assertEquals( asList( "f" ), new ArrayList<String>( only.options() ) );
                 assertFalse( only.acceptsArguments() );
                 assertEquals( "", only.argumentDescription() );
@@ -663,7 +663,7 @@ public class DefaultSettingsOptionParserHelpTest extends AbstractOptionParserFix
         parser.formatHelpWith( null );
     }
 
-    private void assertHelpLines( String... expectedLines ) {
+    private void assertHelpLines( final String... expectedLines ) {
         assertEquals( join( expectedLines, LINE_SEPARATOR ), sink.toString() );
     }
 

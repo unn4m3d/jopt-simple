@@ -58,10 +58,10 @@ public class PunctuationInLongOptionTest extends AbstractOptionParserFixture {
         assertOptionAllowed( "??who?k??n???e????w?" );
     }
 
-    private void assertOptionAllowed( String option ) {
+    private void assertOptionAllowed( final String option ) {
         parser.accepts( option );
 
-        OptionSet options = parser.parse( "--" + option );
+        final OptionSet options = parser.parse( "--" + option );
 
         assertTrue( options.has( option ) );
     }

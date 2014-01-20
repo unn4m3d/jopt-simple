@@ -30,7 +30,7 @@ package joptsimple;
  */
 public class OptionalArgumentOptionSpecOptionsImmutabilityTest extends AbstractOptionSpecOptionsImmutabilityTestCase {
     @Override
-    protected AbstractOptionSpec<?> newOptionSpec( String option ) {
+    protected AbstractOptionSpec<?> newOptionSpec( final String option ) {
         return new OptionalArgumentOptionSpec<Integer>( option );
     }
 }

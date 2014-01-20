@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class SpecialOptionalArgumentHandlingTest {
     @Test
     public void handlesNegativeNumberOptionalArguments() {
-        OptionParser parser = new OptionParser();
+        final OptionParser parser = new OptionParser();
         parser.accepts( "a" ).withOptionalArg().ofType( Integer.class );
         parser.accepts( "2" );
 

@@ -33,7 +33,7 @@ class Problematic {
         // no-op
     }
 
-    Problematic( String s ) {
+    Problematic( final String s ) {
         throw new IllegalStateException(s);
     }
 

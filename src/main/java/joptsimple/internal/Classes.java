@@ -56,7 +56,7 @@ public final class Classes {
      * @param className class name to chew on
      * @return the short name of the class
      */
-    public static String shortNameOf( String className ) {
+    public static String shortNameOf( final String className ) {
         return className.substring( className.lastIndexOf( '.' ) + 1 );
     }
 
@@ -69,7 +69,7 @@ public final class Classes {
      * @return primitive wrapper type if {@code clazz} is primitive, otherwise {@code clazz}
      */
     @SuppressWarnings( "unchecked" )
-    public static <T> Class<T> wrapperOf( Class<T> clazz ) {
+    public static <T> Class<T> wrapperOf( final Class<T> clazz ) {
         return clazz.isPrimitive() ? (Class<T>) WRAPPERS.get( clazz ) : clazz;
     }
 }

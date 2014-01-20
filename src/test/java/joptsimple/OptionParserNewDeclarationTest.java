@@ -51,7 +51,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Boolean.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Boolean.class );
 
-        OptionSet options = parser.parse( "-a", "true", "-b", "false" );
+        final OptionSet options = parser.parse( "-a", "true", "-b", "false" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -67,7 +67,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Byte.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Byte.class );
 
-        OptionSet options = parser.parse( "-a", "-1", "-b", "-2" );
+        final OptionSet options = parser.parse( "-a", "-1", "-b", "-2" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -83,7 +83,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Double.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Double.class );
 
-        OptionSet options = parser.parse( "-a", "3.1415926D", "-b", "6.02E23" );
+        final OptionSet options = parser.parse( "-a", "3.1415926D", "-b", "6.02E23" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -99,7 +99,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Float.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Float.class );
 
-        OptionSet options = parser.parse( "-a", "3.1415926F", "-b", "6.02E23F" );
+        final OptionSet options = parser.parse( "-a", "3.1415926F", "-b", "6.02E23F" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -115,7 +115,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Integer.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-a", "12", "-b", "34" );
+        final OptionSet options = parser.parse( "-a", "12", "-b", "34" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -131,7 +131,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Long.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Long.class );
 
-        OptionSet options = parser.parse( "-a", "123454678901234", "-b", "98765432109876" );
+        final OptionSet options = parser.parse( "-a", "123454678901234", "-b", "98765432109876" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -147,7 +147,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Short.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Short.class );
 
-        OptionSet options = parser.parse( "-a", "5675", "-b", "345" );
+        final OptionSet options = parser.parse( "-a", "5675", "-b", "345" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -163,7 +163,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( java.sql.Date.class );
         parser.accepts( "b" ).withOptionalArg().ofType( java.sql.Date.class );
 
-        OptionSet options = parser.parse( "-a", "2001-09-11", "-b", "1941-12-07" );
+        final OptionSet options = parser.parse( "-a", "2001-09-11", "-b", "1941-12-07" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -179,7 +179,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Time.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Time.class );
 
-        OptionSet options = parser.parse( "-a", "08:57:39", "-b", "23:59:59" );
+        final OptionSet options = parser.parse( "-a", "08:57:39", "-b", "23:59:59" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -195,7 +195,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "a" ).withRequiredArg().ofType( Timestamp.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Timestamp.class );
 
-        OptionSet options = parser.parse( "-a", "1970-01-01 00:00:00", "-b", "1979-12-31 23:59:59.0123456" );
+        final OptionSet options = parser.parse( "-a", "1970-01-01 00:00:00", "-b", "1979-12-31 23:59:59.0123456" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -210,7 +210,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
     public void illegalOptionArgumentMethodConversion() {
         parser.accepts( "a" ).withRequiredArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-a", "foo" );
+        final OptionSet options = parser.parse( "-a", "foo" );
 
         options.valueOf( "a" );
     }
@@ -219,7 +219,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
     public void illegalOptionArgumentConstructorConversion() {
         parser.accepts( "a" ).withRequiredArg().ofType( BigInteger.class );
 
-        OptionSet options = parser.parse( "-a", "foo" );
+        final OptionSet options = parser.parse( "-a", "foo" );
 
         options.valueOf( "a" );
     }
@@ -231,7 +231,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "1" );
         parser.accepts( "2" );
 
-        OptionSet options = parser.parse( "-a", "-1", "-b", "-2" );
+        final OptionSet options = parser.parse( "-a", "-1", "-b", "-2" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -249,7 +249,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "1" );
         parser.accepts( "2" );
 
-        OptionSet options = parser.parse( "-1", "-2", "-a", "-b" );
+        final OptionSet options = parser.parse( "-1", "-2", "-a", "-b" );
 
         assertOptionDetected( options, "1" );
         assertOptionDetected( options, "a" );
@@ -273,7 +273,7 @@ public class OptionParserNewDeclarationTest extends AbstractOptionParserFixture 
         parser.accepts( "1" );
         parser.accepts( "2" );
 
-        OptionSet options = parser.parse( "-1", "-a", "-b", "-2" );
+        final OptionSet options = parser.parse( "-1", "-a", "-b", "-2" );
 
         assertOptionDetected( options, "1" );
         assertOptionDetected( options, "a" );

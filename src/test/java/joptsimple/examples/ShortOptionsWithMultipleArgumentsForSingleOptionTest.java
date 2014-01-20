@@ -17,9 +17,9 @@ public class ShortOptionsWithMultipleArgumentsForSingleOptionTest {
 
     @Test
     public void allowsMultipleValuesForAnOption() {
-        OptionParser parser = new OptionParser( "a:" );
+        final OptionParser parser = new OptionParser( "a:" );
 
-        OptionSet options = parser.parse( "-a", "foo", "-abar", "-a=baz" );
+        final OptionSet options = parser.parse( "-a", "foo", "-abar", "-a=baz" );
 
         assertTrue( options.has( "a" ) );
         assertTrue( options.hasArgument( "a" ) );

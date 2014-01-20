@@ -35,7 +35,7 @@ import static java.util.Collections.*;
 class IllegalOptionSpecificationException extends OptionException {
     private static final long serialVersionUID = -1L;
 
-    IllegalOptionSpecificationException( String option ) {
+    IllegalOptionSpecificationException( final String option ) {
         super( singletonList( option ) );
     }
 

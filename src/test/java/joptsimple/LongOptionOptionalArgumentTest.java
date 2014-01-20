@@ -44,7 +44,7 @@ public class LongOptionOptionalArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentMissingTrailedByAnotherOption() {
-        OptionSet options = parser.parse( "--output", "-a" );
+        final OptionSet options = parser.parse( "--output", "-a" );
 
         assertTrue( options.has( "output" ) );
         assertTrue( options.has( "a" ) );
@@ -54,7 +54,7 @@ public class LongOptionOptionalArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentSeparate() {
-        OptionSet options = parser.parse( "--output", "opt" );
+        final OptionSet options = parser.parse( "--output", "opt" );
 
         assertTrue( options.has( "output" ) );
         assertEquals( singletonList( "opt" ), options.valuesOf( "output" ) );
@@ -63,7 +63,7 @@ public class LongOptionOptionalArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentTogether() {
-        OptionSet options = parser.parse( "--output=opt" );
+        final OptionSet options = parser.parse( "--output=opt" );
 
         assertTrue( options.has( "output" ) );
         assertEquals( singletonList( "opt" ), options.valuesOf( "output" ) );

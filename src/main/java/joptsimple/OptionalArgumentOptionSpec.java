@@ -34,18 +34,18 @@ import java.util.Collection;
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
 class OptionalArgumentOptionSpec<V> extends ArgumentAcceptingOptionSpec<V> {
-    OptionalArgumentOptionSpec( String option ) {
+    OptionalArgumentOptionSpec( final String option ) {
         super( option, false );
     }
 
-    OptionalArgumentOptionSpec( Collection<String> options, String description ) {
+    OptionalArgumentOptionSpec( final Collection<String> options, final String description ) {
         super( options, false, description );
     }
 
     @Override
-    protected void detectOptionArgument( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions ) {
+    protected void detectOptionArgument( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions ) {
         if ( arguments.hasMore() ) {
-            String nextArgument = arguments.peek();
+            final String nextArgument = arguments.peek();
 
             if ( !parser.looksLikeAnOption( nextArgument ) )
                 handleOptionArgument( parser, detectedOptions, arguments );
@@ -58,7 +58,7 @@ class OptionalArgumentOptionSpec<V> extends ArgumentAcceptingOptionSpec<V> {
             detectedOptions.add( this );
     }
 
-    private void handleOptionArgument( OptionParser parser, OptionSet detectedOptions, ArgumentList arguments ) {
+    private void handleOptionArgument( final OptionParser parser, final OptionSet detectedOptions, final ArgumentList arguments ) {
         if ( parser.posixlyCorrect() ) {
             detectedOptions.add( this );
             parser.noMoreOptions();

@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 public class ShortOptionsTest {
     @Test
     public void supportsShortOptions() {
-        OptionParser parser = new OptionParser( "aB?*." );
+        final OptionParser parser = new OptionParser( "aB?*." );
 
-        OptionSet options = parser.parse( "-a", "-B", "-?" );
+        final OptionSet options = parser.parse( "-a", "-B", "-?" );
 
         assertTrue( options.has( "a" ) );
         assertTrue( options.has( "B" ) );

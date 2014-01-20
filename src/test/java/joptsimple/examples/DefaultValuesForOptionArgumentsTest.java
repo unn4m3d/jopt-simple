@@ -19,21 +19,21 @@ public class DefaultValuesForOptionArgumentsTest {
 
     @Test
     public void allowsSpecificationOfDefaultValues() throws Exception {
-        File tempDir = new File( System.getProperty( "java.io.tmpdir" ) );
-        File tempFile = File.createTempFile( "aFile", ".txt" );
-        OptionParser parser = new OptionParser();
-        OptionSpec<File> infile =
+        final File tempDir = new File( System.getProperty( "java.io.tmpdir" ) );
+        final File tempFile = File.createTempFile( "aFile", ".txt" );
+        final OptionParser parser = new OptionParser();
+        final OptionSpec<File> infile =
             parser.accepts( "infile" ).withRequiredArg().ofType( File.class ).defaultsTo( tempFile );
-        OptionSpec<File> outdir =
+        final OptionSpec<File> outdir =
             parser.accepts( "outdir" ).withRequiredArg().ofType( File.class ).defaultsTo( tempDir );
-        OptionSpec<Integer> bufferSize =
+        final OptionSpec<Integer> bufferSize =
             parser.accepts( "buffer-size" ).withOptionalArg().ofType( Integer.class ).defaultsTo( 4096 );
-        OptionSpec<Level> level =
+        final OptionSpec<Level> level =
             parser.accepts( "level" ).withOptionalArg().ofType( Level.class ).defaultsTo( INFO );
-        OptionSpec<Integer> count =
+        final OptionSpec<Integer> count =
             parser.accepts( "count" ).withOptionalArg().ofType( Integer.class ).defaultsTo( 10 );
 
-        OptionSet options = parser.parse( "--level", "WARNING", "--count", "--infile", "/etc/passwd" );
+        final OptionSet options = parser.parse( "--level", "WARNING", "--count", "--infile", "/etc/passwd" );
 
         assertEquals( new File( "/etc/passwd" ), infile.value( options ) );
         assertTrue( options.has( infile ) );

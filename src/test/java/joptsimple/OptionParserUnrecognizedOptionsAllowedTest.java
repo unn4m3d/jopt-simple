@@ -47,7 +47,7 @@ public class OptionParserUnrecognizedOptionsAllowedTest extends AbstractOptionPa
     public void unrecognizedOptionAllowed() {
         parser.allowsUnrecognizedOptions();
 
-        OptionSet options = parser.parse( "-a" );
+        final OptionSet options = parser.parse( "-a" );
 
         assertEquals( asList( "-a" ), options.nonOptionArguments() );
     }

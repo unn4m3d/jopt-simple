@@ -34,7 +34,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
-public class ExceptionMatchers {
+public final class ExceptionMatchers {
     private ExceptionMatchers() {
         throw new UnsupportedOperationException();
     }
@@ -42,11 +42,11 @@ public class ExceptionMatchers {
     public static Matcher<OptionException> withOption( final String option ) {
         return new TypeSafeMatcher<OptionException>() {
             @Override
-            public boolean matchesSafely( OptionException target ) {
+            public boolean matchesSafely( final OptionException target ) {
                 return target.options().contains( option );
             }
 
-            public void describeTo( Description description ) {
+            public void describeTo( final Description description ) {
                 description.appendText( "an OptionException indicating the option ");
                 description.appendValue( option );
             }
@@ -56,11 +56,11 @@ public class ExceptionMatchers {
     public static Matcher<Throwable> withCauseOfType( final Class<? extends Throwable> type ) {
         return new TypeSafeMatcher<Throwable>() {
             @Override
-            public boolean matchesSafely( Throwable target ) {
+            public boolean matchesSafely( final Throwable target ) {
                 return type.isInstance( target.getCause() );
             }
 
-            public void describeTo( Description description ) {
+            public void describeTo( final Description description ) {
                 description.appendText( "an exception with cause of type " );
                 description.appendValue( type );
             }
@@ -70,11 +70,11 @@ public class ExceptionMatchers {
     public static Matcher<InvocationTargetException> withTargetOfType( final Class<? extends Throwable> type ) {
         return new TypeSafeMatcher<InvocationTargetException>() {
             @Override
-            public boolean matchesSafely( InvocationTargetException target ) {
+            public boolean matchesSafely( final InvocationTargetException target ) {
                 return type.isInstance( target.getTargetException() );
             }
 
-            public void describeTo( Description description ) {
+            public void describeTo( final Description description ) {
                 description.appendText( "an InvocationTargetException with target of type " );
                 description.appendValue( type );
             }

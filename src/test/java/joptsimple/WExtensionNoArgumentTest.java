@@ -55,7 +55,7 @@ public class WExtensionNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void wExtensionWithLongOptionWithoutAnArgument() {
-        OptionSet options = parser.parse( "-W", "silent" );
+        final OptionSet options = parser.parse( "-W", "silent" );
 
         assertOptionNotDetected( options, "W" );
         assertOptionDetected( options, "silent" );

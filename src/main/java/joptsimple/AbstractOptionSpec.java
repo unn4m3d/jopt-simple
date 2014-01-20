@@ -46,11 +46,11 @@ abstract class AbstractOptionSpec<V> implements OptionSpec<V>, OptionDescriptor 
     private final String description;
     private boolean forHelp;
 
-    protected AbstractOptionSpec( String option ) {
+    AbstractOptionSpec(final String option) {
         this( singletonList( option ), EMPTY );
     }
 
-    protected AbstractOptionSpec( Collection<String> options, String description ) {
+    AbstractOptionSpec(final Collection<String> options, final String description) {
         arrangeOptions( options );
 
         this.description = description;
@@ -60,11 +60,11 @@ abstract class AbstractOptionSpec<V> implements OptionSpec<V>, OptionDescriptor 
         return unmodifiableList( options );
     }
 
-    public final List<V> values( OptionSet detectedOptions ) {
+    public final List<V> values( final OptionSet detectedOptions ) {
         return detectedOptions.valuesOf( this );
     }
 
-    public final V value( OptionSet detectedOptions ) {
+    public final V value( final OptionSet detectedOptions ) {
         return detectedOptions.valueOf( this );
     }
 
@@ -85,39 +85,39 @@ abstract class AbstractOptionSpec<V> implements OptionSpec<V>, OptionDescriptor 
         return false;
     }
 
-    protected V convertWith( ValueConverter<V> converter, String argument ) {
+    V convertWith(final ValueConverter<V> converter, final String argument) {
         try {
             return Reflection.convertWith( converter, argument );
         }
-        catch ( ReflectionException ex ) {
+        catch ( final ReflectionException ex ) {
             throw new OptionArgumentConversionException( options(), argument, ex );
         }
-        catch ( ValueConversionException ex ) {
+        catch ( final ValueConversionException ex ) {
             throw new OptionArgumentConversionException( options(), argument, ex );
         }
     }
 
-    protected String argumentTypeIndicatorFrom( ValueConverter<V> converter ) {
+    String argumentTypeIndicatorFrom(final ValueConverter<V> converter) {
         if ( converter == null )
             return null;
 
-        String pattern = converter.valuePattern();
+        final String pattern = converter.valuePattern();
         return pattern == null ? converter.valueType().getName() : pattern;
     }
 
     abstract void handleOption( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions,
         String detectedArgument );
 
-    private void arrangeOptions( Collection<String> unarranged ) {
+    private void arrangeOptions( final Collection<String> unarranged ) {
         if ( unarranged.size() == 1 ) {
             options.addAll( unarranged );
             return;
         }
 
-        List<String> shortOptions = new ArrayList<String>();
-        List<String> longOptions = new ArrayList<String>();
+        final List<String> shortOptions = new ArrayList<String>();
+        final List<String> longOptions = new ArrayList<String>();
 
-        for ( String each : unarranged ) {
+        for ( final String each : unarranged ) {
             if ( each.length() == 1 )
                 shortOptions.add( each );
             else
@@ -132,11 +132,11 @@ abstract class AbstractOptionSpec<V> implements OptionSpec<V>, OptionDescriptor 
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         if ( !( that instanceof AbstractOptionSpec<?> ) )
             return false;
 
-        AbstractOptionSpec<?> other = (AbstractOptionSpec<?>) that;
+        final AbstractOptionSpec<?> other = (AbstractOptionSpec<?>) that;
         return options.equals( other.options );
     }
 

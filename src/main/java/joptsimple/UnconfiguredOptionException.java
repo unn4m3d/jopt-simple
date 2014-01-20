@@ -37,11 +37,11 @@ import static java.util.Collections.*;
 class UnconfiguredOptionException extends OptionException {
     private static final long serialVersionUID = -1L;
 
-    UnconfiguredOptionException( String option ) {
+    UnconfiguredOptionException( final String option ) {
         this( singletonList( option ) );
     }
 
-    UnconfiguredOptionException( Collection<String> options ) {
+    UnconfiguredOptionException( final Collection<String> options ) {
         super( options );
     }
 

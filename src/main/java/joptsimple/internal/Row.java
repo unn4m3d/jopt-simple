@@ -32,19 +32,19 @@ class Row {
     final String option;
     final String description;
 
-    Row( String option, String description ) {
+    Row( final String option, final String description ) {
         this.option = option;
         this.description = description;
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         if ( that == this )
             return true;
         if ( that == null || !getClass().equals( that.getClass() ) )
             return false;
 
-        Row other = (Row) that;
+        final Row other = (Row) that;
         return option.equals( other.option ) && description.equals( other.description );
     }
 

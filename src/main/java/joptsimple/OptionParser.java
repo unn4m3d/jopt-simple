@@ -230,25 +230,25 @@ public class OptionParser implements OptionDeclarer {
      * @throws OptionException if the option specification contains illegal characters or otherwise cannot be
      * recognized
      */
-    public OptionParser( String optionSpecification ) {
+    public OptionParser( final String optionSpecification ) {
         this();
 
         new OptionSpecTokenizer( optionSpecification ).configure( this );
     }
 
-    public OptionSpecBuilder accepts( String option ) {
+    public OptionSpecBuilder accepts( final String option ) {
         return acceptsAll( singletonList( option ) );
     }
 
-    public OptionSpecBuilder accepts( String option, String description ) {
+    public OptionSpecBuilder accepts( final String option, final String description ) {
         return acceptsAll( singletonList( option ), description );
     }
 
-    public OptionSpecBuilder acceptsAll( Collection<String> options ) {
+    public OptionSpecBuilder acceptsAll( final Collection<String> options ) {
         return acceptsAll( options, "" );
     }
 
-    public OptionSpecBuilder acceptsAll( Collection<String> options, String description ) {
+    public OptionSpecBuilder acceptsAll( final Collection<String> options, final String description ) {
         if ( options.isEmpty() )
             throw new IllegalArgumentException( "need at least one option" );
 
@@ -258,22 +258,22 @@ public class OptionParser implements OptionDeclarer {
     }
 
     public NonOptionArgumentSpec<String> nonOptions() {
-        NonOptionArgumentSpec<String> spec = new NonOptionArgumentSpec<String>();
+        final NonOptionArgumentSpec<String> spec = new NonOptionArgumentSpec<String>();
 
         recognize( spec );
 
         return spec;
     }
 
-    public NonOptionArgumentSpec<String> nonOptions( String description ) {
-        NonOptionArgumentSpec<String> spec = new NonOptionArgumentSpec<String>( description );
+    public NonOptionArgumentSpec<String> nonOptions( final String description ) {
+        final NonOptionArgumentSpec<String> spec = new NonOptionArgumentSpec<String>( description );
 
         recognize( spec );
 
         return spec;
     }
 
-    public void posixlyCorrect( boolean setting ) {
+    public void posixlyCorrect( final boolean setting ) {
         posixlyCorrect = setting;
         state = moreOptions( setting );
     }
@@ -291,14 +291,14 @@ public class OptionParser implements OptionDeclarer {
     }
 
     /** @todo Test/fix for trainingOrder */
-    public void recognizeAlternativeLongOptions( boolean recognize ) {
+    public void recognizeAlternativeLongOptions( final boolean recognize ) {
         if ( recognize )
             recognize( new AlternativeLongOptionSpec() );
         else
             recognizedOptions.remove( String.valueOf( RESERVED_FOR_EXTENSIONS ) );
     }
 
-    void recognize( AbstractOptionSpec<?> spec ) {
+    void recognize( final AbstractOptionSpec<?> spec ) {
         recognizedOptions.putAll(spec.options(), spec);
         trainingOrder.add( spec );
     }
@@ -322,7 +322,7 @@ public class OptionParser implements OptionDeclarer {
          * @param helpFormatter the help formatter, never missing
          * @return the help printer, never missing
          */
-        public HelpPrinter formatWith( HelpFormatter helpFormatter ) {
+        public HelpPrinter formatWith( final HelpFormatter helpFormatter ) {
             this.helpFormatter = helpFormatter;
             return this;
         }
@@ -337,7 +337,7 @@ public class OptionParser implements OptionDeclarer {
          * @throws NullPointerException if {@code sink} is {@code null}
          * @see #on(Writer)
          */
-        public void on( OutputStream sink ) throws IOException {
+        public void on( final OutputStream sink ) throws IOException {
             on( new OutputStreamWriter( sink ) );
         }
 
@@ -351,7 +351,7 @@ public class OptionParser implements OptionDeclarer {
          * @throws NullPointerException if {@code sink} is {@code null}
          * @see #on(OutputStream)
          */
-        public void on( Writer sink ) throws IOException {
+        public void on( final Writer sink ) throws IOException {
             sink.write( formatHelp() );
             sink.flush();
         }
@@ -386,7 +386,7 @@ public class OptionParser implements OptionDeclarer {
      * @see #printHelpOn(Writer)
      * @see #printHelp()
      */
-    public void printHelpOn( OutputStream sink ) throws IOException {
+    public void printHelpOn( final OutputStream sink ) throws IOException {
         printHelpOn( new OutputStreamWriter( sink ) );
     }
 
@@ -401,7 +401,7 @@ public class OptionParser implements OptionDeclarer {
      * @see #printHelpOn(OutputStream)
      * @see #printHelp()
      */
-    public void printHelpOn( Writer sink ) throws IOException {
+    public void printHelpOn( final Writer sink ) throws IOException {
         sink.write( helpFormatter.format( this ) );
         sink.flush();
     }
@@ -412,7 +412,7 @@ public class OptionParser implements OptionDeclarer {
      * @param formatter the formatter to use for printing help
      * @throws NullPointerException if the formatter is {@code null}
      */
-    public void formatHelpWith( HelpFormatter formatter ) {
+    public void formatHelpWith( final HelpFormatter formatter ) {
         if ( formatter == null )
             throw new NullPointerException();
 
@@ -449,9 +449,9 @@ public class OptionParser implements OptionDeclarer {
      * @throws OptionException if problems are detected while parsing
      * @throws NullPointerException if the argument list is {@code null}
      */
-    public OptionSet parse( String... arguments ) {
-        ArgumentList argumentList = new ArgumentList( arguments );
-        OptionSet detected = new OptionSet( recognizedOptions.toJavaUtilMap() );
+    public OptionSet parse( final String... arguments ) {
+        final ArgumentList argumentList = new ArgumentList( arguments );
+        final OptionSet detected = new OptionSet( recognizedOptions.toJavaUtilMap() );
         detected.add( recognizedOptions.get( NonOptionArgumentSpec.NAME ) );
 
         while ( argumentList.hasMore() )
@@ -464,32 +464,32 @@ public class OptionParser implements OptionDeclarer {
         return detected;
     }
 
-    private void ensureRequiredOptions( OptionSet options ) {
-        Collection<String> missingRequiredOptions = missingRequiredOptions( options );
-        boolean helpOptionPresent = isHelpOptionPresent( options );
+    private void ensureRequiredOptions( final OptionSet options ) {
+        final Collection<String> missingRequiredOptions = missingRequiredOptions( options );
+        final boolean helpOptionPresent = isHelpOptionPresent( options );
 
         if ( !missingRequiredOptions.isEmpty() && !helpOptionPresent )
             throw new MissingRequiredOptionException( missingRequiredOptions );
     }
 
-    private Collection<String> missingRequiredOptions( OptionSet options ) {
-        Collection<String> missingRequiredOptions = new HashSet<String>();
+    private Collection<String> missingRequiredOptions( final OptionSet options ) {
+        final Collection<String> missingRequiredOptions = new HashSet<String>();
 
-        for ( OptionSpec<?> each : abbreviationOrder() ) {
+        for ( final OptionSpec<?> each : abbreviationOrder() ) {
             if ( each.isRequired() && !options.has( each ) )
                 missingRequiredOptions.addAll( each.options() );
         }
 
-        for ( Map.Entry<Collection<String>, Set<OptionSpec<?>>> eachEntry : requiredIf.entrySet() ) {
-            OptionSpec<?> required = specFor( eachEntry.getKey().iterator().next() );
+        for ( final Map.Entry<Collection<String>, Set<OptionSpec<?>>> eachEntry : requiredIf.entrySet() ) {
+            final OptionSpec<?> required = specFor( eachEntry.getKey().iterator().next() );
 
             if ( optionsHasAnyOf( options, eachEntry.getValue() ) && !options.has( required ) ) {
                 missingRequiredOptions.addAll( required.options() );
             }
         }
 
-        for ( Map.Entry<Collection<String>, Set<OptionSpec<?>>> eachEntry : requiredUnless.entrySet() ) {
-            OptionSpec<?> required = specFor( eachEntry.getKey().iterator().next() );
+        for ( final Map.Entry<Collection<String>, Set<OptionSpec<?>>> eachEntry : requiredUnless.entrySet() ) {
+            final OptionSpec<?> required = specFor( eachEntry.getKey().iterator().next() );
 
             if ( !optionsHasAnyOf( options, eachEntry.getValue() ) && !options.has( required ) ) {
                 missingRequiredOptions.addAll( required.options() );
@@ -499,8 +499,8 @@ public class OptionParser implements OptionDeclarer {
         return missingRequiredOptions;
     }
 
-    private boolean optionsHasAnyOf( OptionSet options, Collection<OptionSpec<?>> specs ) {
-        for ( OptionSpec<?> each : specs ) {
+    private boolean optionsHasAnyOf( final OptionSet options, final Collection<OptionSpec<?>> specs ) {
+        for ( final OptionSpec<?> each : specs ) {
             if ( options.has( each ) )
                 return true;
         }
@@ -508,9 +508,9 @@ public class OptionParser implements OptionDeclarer {
         return false;
     }
 
-    private boolean isHelpOptionPresent( OptionSet options ) {
+    private boolean isHelpOptionPresent( final OptionSet options ) {
         boolean helpOptionPresent = false;
-        for ( OptionSpec<?> each : abbreviationOrder() ) {
+        for ( final OptionSpec<?> each : abbreviationOrder() ) {
             if ( each.isForHelp() && options.has( each ) ) {
                 helpOptionPresent = true;
                 break;
@@ -519,18 +519,18 @@ public class OptionParser implements OptionDeclarer {
         return helpOptionPresent;
     }
 
-    void handleLongOptionToken( String candidate, ArgumentList arguments, OptionSet detected ) {
-        KeyValuePair optionAndArgument = parseLongOptionWithArgument( candidate );
+    void handleLongOptionToken( final String candidate, final ArgumentList arguments, final OptionSet detected ) {
+        final KeyValuePair optionAndArgument = parseLongOptionWithArgument( candidate );
 
         if ( !isRecognized( optionAndArgument.key ) )
             throw unrecognizedOption( optionAndArgument.key );
 
-        AbstractOptionSpec<?> optionSpec = specFor( optionAndArgument.key );
+        final AbstractOptionSpec<?> optionSpec = specFor( optionAndArgument.key );
         optionSpec.handleOption( this, arguments, detected, optionAndArgument.value );
     }
 
-    void handleShortOptionToken( String candidate, ArgumentList arguments, OptionSet detected ) {
-        KeyValuePair optionAndArgument = parseShortOptionWithArgument( candidate );
+    void handleShortOptionToken( final String candidate, final ArgumentList arguments, final OptionSet detected ) {
+        final KeyValuePair optionAndArgument = parseShortOptionWithArgument( candidate );
 
         if ( isRecognized( optionAndArgument.key ) ) {
             specFor( optionAndArgument.key ).handleOption( this, arguments, detected, optionAndArgument.value );
@@ -538,15 +538,15 @@ public class OptionParser implements OptionDeclarer {
             handleShortOptionCluster( candidate, arguments, detected );
     }
 
-    private void handleShortOptionCluster( String candidate, ArgumentList arguments, OptionSet detected ) {
-        char[] options = extractShortOptionsFrom( candidate );
+    private void handleShortOptionCluster( final String candidate, final ArgumentList arguments, final OptionSet detected ) {
+        final char[] options = extractShortOptionsFrom( candidate );
         validateOptionCharacters( options );
 
         for ( int i = 0; i < options.length; i++ ) {
-            AbstractOptionSpec<?> optionSpec = specFor( options[i] );
+            final AbstractOptionSpec<?> optionSpec = specFor( options[i] );
 
             if ( optionSpec.acceptsArguments() && options.length > i + 1 ) {
-                String detectedArgument = String.valueOf( options, i + 1, options.length - 1 - i );
+                final String detectedArgument = String.valueOf( options, i + 1, options.length - 1 - i );
                 optionSpec.handleOption( this, arguments, detected, detectedArgument );
                 break;
             }
@@ -555,7 +555,7 @@ public class OptionParser implements OptionDeclarer {
         }
     }
 
-    void handleNonOptionArgument( String candidate, ArgumentList arguments, OptionSet detectedOptions ) {
+    void handleNonOptionArgument( final String candidate, final ArgumentList arguments, final OptionSet detectedOptions ) {
         specFor( NonOptionArgumentSpec.NAME ).handleOption( this, arguments, detectedOptions, candidate );
     }
 
@@ -563,35 +563,35 @@ public class OptionParser implements OptionDeclarer {
         state = OptionParserState.noMoreOptions();
     }
 
-    boolean looksLikeAnOption( String argument ) {
+    boolean looksLikeAnOption( final String argument ) {
         return isShortOptionToken( argument ) || isLongOptionToken( argument );
     }
 
-    boolean isRecognized( String option ) {
+    boolean isRecognized( final String option ) {
         return recognizedOptions.contains( option );
     }
 
-    void requiredIf( Collection<String> precedentSynonyms, String required ) {
+    void requiredIf( final Collection<String> precedentSynonyms, final String required ) {
         requiredIf( precedentSynonyms, specFor( required ) );
     }
 
-    void requiredIf( Collection<String> precedentSynonyms, OptionSpec<?> required ) {
+    void requiredIf( final Collection<String> precedentSynonyms, final OptionSpec<?> required ) {
         putRequiredOption( precedentSynonyms, required, requiredIf );
     }
 
-    void requiredUnless( Collection<String> precedentSynonyms, String required ) {
+    void requiredUnless( final Collection<String> precedentSynonyms, final String required ) {
         requiredUnless( precedentSynonyms, specFor( required ) );
     }
 
-    void requiredUnless( Collection<String> precedentSynonyms, OptionSpec<?> required ) {
+    void requiredUnless( final Collection<String> precedentSynonyms, final OptionSpec<?> required ) {
         putRequiredOption( precedentSynonyms, required, requiredUnless );
     }
 
-    private void putRequiredOption( Collection<String> precedentSynonyms, OptionSpec<?> required,
-        Map<Collection<String>, Set<OptionSpec<?>>> target ) {
+    private void putRequiredOption( final Collection<String> precedentSynonyms, final OptionSpec<?> required,
+        final Map<Collection<String>, Set<OptionSpec<?>>> target ) {
 
-        for ( String each : precedentSynonyms ) {
-            AbstractOptionSpec<?> spec = specFor( each );
+        for ( final String each : precedentSynonyms ) {
+            final AbstractOptionSpec<?> spec = specFor( each );
             if ( spec == null )
                 throw new UnconfiguredOptionException( precedentSynonyms );
         }
@@ -605,11 +605,11 @@ public class OptionParser implements OptionDeclarer {
         associated.add( required );
     }
 
-    private AbstractOptionSpec<?> specFor( char option ) {
+    private AbstractOptionSpec<?> specFor( final char option ) {
         return specFor( String.valueOf( option ) );
     }
 
-    private AbstractOptionSpec<?> specFor( String option ) {
+    private AbstractOptionSpec<?> specFor( final String option ) {
         return recognizedOptions.get( option );
     }
 
@@ -617,16 +617,16 @@ public class OptionParser implements OptionDeclarer {
         state = moreOptions( posixlyCorrect );
     }
 
-    private static char[] extractShortOptionsFrom( String argument ) {
-        char[] options = new char[argument.length() - 1];
+    private static char[] extractShortOptionsFrom( final String argument ) {
+        final char[] options = new char[argument.length() - 1];
         argument.getChars( 1, argument.length(), options, 0 );
 
         return options;
     }
 
-    private void validateOptionCharacters( char[] options ) {
-        for ( char each : options ) {
-            String option = String.valueOf( each );
+    private void validateOptionCharacters( final char[] options ) {
+        for ( final char each : options ) {
+            final String option = String.valueOf( each );
 
             if ( !isRecognized( option ) )
                 throw unrecognizedOption( option );
@@ -636,11 +636,11 @@ public class OptionParser implements OptionDeclarer {
         }
     }
 
-    private static KeyValuePair parseLongOptionWithArgument( String argument ) {
+    private static KeyValuePair parseLongOptionWithArgument( final String argument ) {
         return KeyValuePair.valueOf( argument.substring( 2 ) );
     }
 
-    private static KeyValuePair parseShortOptionWithArgument( String argument ) {
+    private static KeyValuePair parseShortOptionWithArgument( final String argument ) {
         return KeyValuePair.valueOf( argument.substring( 1 ) );
     }
 }

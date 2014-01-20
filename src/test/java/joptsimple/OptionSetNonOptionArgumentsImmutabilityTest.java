@@ -37,8 +37,8 @@ public class OptionSetNonOptionArgumentsImmutabilityTest extends UnmodifiableLis
     @SuppressWarnings( "unchecked" )
     @Override
     protected List<String> newList() {
-        OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
-        NonOptionArgumentSpec<String> nonOptions = new NonOptionArgumentSpec<String>( null );
+        final OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
+        final NonOptionArgumentSpec<String> nonOptions = new NonOptionArgumentSpec<String>( null );
         options.addWithArgument( nonOptions, "1" );
         options.addWithArgument( nonOptions, "2" );
         return (List<String>) options.nonOptionArguments();

@@ -50,8 +50,8 @@ public final class Strings {
      * @param count how many times to repeat the character
      * @return the resultant string
      */
-    public static String repeat( char ch, int count ) {
-        StringBuilder buffer = new StringBuilder();
+    public static String repeat( final char ch, final int count ) {
+        final StringBuilder buffer = new StringBuilder();
 
         for ( int i = 0; i < count; ++i )
             buffer.append( ch );
@@ -65,7 +65,7 @@ public final class Strings {
      * @param target string to check
      * @return {@code true} if the target string is null or empty
      */
-    public static boolean isNullOrEmpty( String target ) {
+    public static boolean isNullOrEmpty( final String target ) {
         return target == null || EMPTY.equals( target );
     }
 
@@ -78,7 +78,7 @@ public final class Strings {
      * @param end character to append
      * @return the surrounded string
      */
-    public static String surround( String target, char begin, char end ) {
+    public static String surround( final String target, final char begin, final char end ) {
         return begin + target + end;
     }
 
@@ -90,7 +90,7 @@ public final class Strings {
      * @param separator the separator
      * @return the joined string
      */
-    public static String join( String[] pieces, String separator ) {
+    public static String join( final String[] pieces, final String separator ) {
         return join( asList( pieces ), separator );
     }
 
@@ -102,10 +102,10 @@ public final class Strings {
      * @param separator the separator
      * @return the joined string
      */
-    public static String join( List<String> pieces, String separator ) {
-        StringBuilder buffer = new StringBuilder();
+    public static String join( final List<String> pieces, final String separator ) {
+        final StringBuilder buffer = new StringBuilder();
 
-        for ( Iterator<String> iter = pieces.iterator(); iter.hasNext(); ) {
+        for ( final Iterator<String> iter = pieces.iterator(); iter.hasNext(); ) {
             buffer.append( iter.next() );
 
             if ( iter.hasNext() )

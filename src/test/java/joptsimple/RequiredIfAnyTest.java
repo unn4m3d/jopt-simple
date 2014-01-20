@@ -40,8 +40,8 @@ public class RequiredIfAnyTest extends AbstractOptionParserFixture {
     public void configureParser() {
         parser.accepts( "a" );
         parser.accepts( "b" );
-        OptionSpec<Void> c = parser.accepts( "c" );
-        OptionSpec<Void> d = parser.accepts( "d" );
+        final OptionSpec<Void> c = parser.accepts( "c" );
+        final OptionSpec<Void> d = parser.accepts( "d" );
         parser.accepts( "e" );
         parser.accepts( "n" ).requiredIf( "a", "b" ).requiredIf( c, d );
     }
@@ -69,8 +69,8 @@ public class RequiredIfAnyTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsCommandLineWithConditionallyRequiredOptionsPresent() {
-        OptionSet options = parser.parse( "-b", "-n" );
-        
+        final OptionSet options = parser.parse( "-b", "-n" );
+
         assertOptionDetected( options, "b" );
         assertOptionDetected( options, "n" );
         assertEquals( emptyList(), options.nonOptionArguments() );
@@ -78,7 +78,7 @@ public class RequiredIfAnyTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsOptionWithPrerequisiteAsNormalIfPrerequisiteNotInPlay() {
-        OptionSet options = parser.parse( "-n" );
+        final OptionSet options = parser.parse( "-n" );
 
         assertOptionDetected( options, "n" );
         assertEquals( emptyList(), options.nonOptionArguments() );

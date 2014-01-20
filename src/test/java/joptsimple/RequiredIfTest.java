@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
 public class RequiredIfTest extends AbstractOptionParserFixture {
     @Before
     public void configureParser() {
-        OptionSpec<Void> ftp = parser.acceptsAll( asList( "ftp", "file-transfer" ) );
+        final OptionSpec<Void> ftp = parser.acceptsAll( asList( "ftp", "file-transfer" ) );
         parser.acceptsAll( asList( "username", "userid" ) ).requiredIf( "file-transfer" ).withRequiredArg();
         parser.acceptsAll( asList( "password", "pwd" ) ).requiredIf( ftp ).withRequiredArg();
         parser.accepts( "?" ).forHelp();
@@ -68,7 +68,7 @@ public class RequiredIfTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsCommandLineWithConditionallyRequiredOptionsPresent() {
-        OptionSet options = parser.parse( "--ftp", "--userid", "joe", "--password=secret" );
+        final OptionSet options = parser.parse( "--ftp", "--userid", "joe", "--password=secret" );
 
         assertOptionDetected( options, "ftp" );
         assertOptionDetected( options, "username" );
@@ -80,7 +80,7 @@ public class RequiredIfTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsOptionWithPrerequisiteAsNormalIfPrerequisiteNotInPlay() {
-        OptionSet options = parser.parse( "--pwd", "secret" );
+        final OptionSet options = parser.parse( "--pwd", "secret" );
 
         assertOptionDetected( options, "pwd" );
         assertEquals( singletonList( "secret" ), options.valuesOf( "pwd" ) );
@@ -103,7 +103,7 @@ public class RequiredIfTest extends AbstractOptionParserFixture {
 
     @Test
     public void presenceOfHelpOptionNegatesRequiredIfness() {
-        OptionSet options = parser.parse( "--ftp", "-?" );
+        final OptionSet options = parser.parse( "--ftp", "-?" );
 
         assertOptionDetected( options, "ftp" );
         assertOptionDetected( options, "?" );

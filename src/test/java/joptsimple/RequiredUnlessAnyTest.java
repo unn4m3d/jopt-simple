@@ -36,22 +36,22 @@ public class RequiredUnlessAnyTest extends AbstractOptionParserFixture {
     public void configureParser() {
         parser.accepts( "a" );
         parser.accepts( "b" );
-        OptionSpec<Void> c = parser.accepts( "c" );
-        OptionSpec<Void> d = parser.accepts( "d" );
+        final OptionSpec<Void> c = parser.accepts( "c" );
+        final OptionSpec<Void> d = parser.accepts( "d" );
         parser.accepts( "e" );
         parser.accepts( "n" ).requiredUnless( "a", "b" ).requiredUnless( c, d );
     }
 
     @Test
     public void commandLineMissingConditionallyRequiredOption() {
-        OptionSet options = parser.parse( "-a" );
+        final OptionSet options = parser.parse( "-a" );
         assertOptionDetected( options, "a" );
         assertOptionNotDetected( options, "n" );
     }
 
     @Test
     public void commandLineWithNotAllConditionallyRequiredOptionsPresent() {
-        OptionSet options = parser.parse( "-a", "-b", "-c", "-d" );
+        final OptionSet options = parser.parse( "-a", "-b", "-c", "-d" );
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
         assertOptionDetected( options, "c" );
@@ -61,7 +61,7 @@ public class RequiredUnlessAnyTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsCommandLineWithConditionallyRequiredOptionsPresent() {
-        OptionSet options = parser.parse( "-n" );
+        final OptionSet options = parser.parse( "-n" );
 
         assertOptionDetected( options, "n" );
         assertEquals( emptyList(), options.nonOptionArguments() );
@@ -69,7 +69,7 @@ public class RequiredUnlessAnyTest extends AbstractOptionParserFixture {
 
     @Test
     public void acceptsOptionWithPrerequisiteAsNormalIfPrerequisiteNotInPlay() {
-        OptionSet options = parser.parse( "-a", "-n" );
+        final OptionSet options = parser.parse( "-a", "-n" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "n" );

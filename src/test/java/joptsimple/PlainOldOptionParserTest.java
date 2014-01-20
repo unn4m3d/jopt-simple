@@ -37,9 +37,9 @@ import static org.junit.Assert.*;
 public class PlainOldOptionParserTest extends AbstractOptionParserFixture {
     @Test
     public void nonOptionsOnly() {
-        String[] arguments = { "foo", "bar" };
+        final String[] arguments = { "foo", "bar" };
 
-        OptionSet options = parser.parse( arguments );
+        final OptionSet options = parser.parse( arguments );
 
         assertEquals( asList( arguments ), options.nonOptionArguments() );
     }

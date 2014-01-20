@@ -57,10 +57,10 @@ public class ParsingSeparatedConvertedOptionValuesTest extends AbstractOptionPar
         assertCorrectParse( "c", ':', "-c/usr:/opt:/var" );
     }
 
-    private void assertCorrectParse( String option, char separator, String... args ) {
+    private void assertCorrectParse( final String option, final char separator, final String... args ) {
         parser.accepts( option ).withRequiredArg().withValuesSeparatedBy( separator )
             .withValuesConvertedBy( new ValueConverter<File>() {
-                public File convert( String value ) {
+                public File convert( final String value ) {
                     return new File( value );
                 }
 
@@ -73,7 +73,7 @@ public class ParsingSeparatedConvertedOptionValuesTest extends AbstractOptionPar
                 }
             } );
 
-        OptionSet options = parser.parse( args );
+        final OptionSet options = parser.parse( args );
 
         assertEquals(
             asList( new File( "/usr" ), new File( "/opt" ), new File( "/var" ) ),

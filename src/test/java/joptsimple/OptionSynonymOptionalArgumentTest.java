@@ -70,8 +70,8 @@ public class OptionSynonymOptionalArgumentTest extends AbstractOptionParserFixtu
             asList( new File( "opt" ), new File( "tmp" ), new File( "usr" ) ) );
     }
 
-    private void assertDetections( String[] args, List<?> optionArguments ) {
-        OptionSet options = parser.parse( args );
+    private void assertDetections( final String[] args, final List<?> optionArguments ) {
+        final OptionSet options = parser.parse( args );
         assertEquals( optionArguments, options.valuesOf( "d" ) );
         assertEquals( optionArguments, options.valuesOf( "output-dir" ) );
         assertEquals( optionArguments, options.valuesOf( "folder" ) );

@@ -39,7 +39,7 @@ class UnacceptableNumberOfNonOptionsException extends OptionException {
     private final int maximum;
     private final int actual;
 
-    UnacceptableNumberOfNonOptionsException( int minimum, int maximum, int actual ) {
+    UnacceptableNumberOfNonOptionsException( final int minimum, final int maximum, final int actual ) {
         super( singletonList( NonOptionArgumentSpec.NAME ) );
 
         this.minimum = minimum;

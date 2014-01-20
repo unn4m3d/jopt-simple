@@ -37,7 +37,7 @@ abstract class OptionParserState {
     static OptionParserState noMoreOptions() {
         return new OptionParserState() {
             @Override
-            protected void handleArgument( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions ) {
+            protected void handleArgument( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions ) {
                 parser.handleNonOptionArgument( arguments.next(), arguments, detectedOptions );
             }
         };
@@ -46,8 +46,8 @@ abstract class OptionParserState {
     static OptionParserState moreOptions( final boolean posixlyCorrect ) {
         return new OptionParserState() {
             @Override
-            protected void handleArgument( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions ) {
-                String candidate = arguments.next();
+            protected void handleArgument( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions ) {
+                final String candidate = arguments.next();
                 try {
                     if ( isOptionTerminator( candidate ) ) {
                         parser.noMoreOptions();
@@ -59,7 +59,7 @@ abstract class OptionParserState {
                         parser.handleShortOptionToken( candidate, arguments, detectedOptions );
                         return;
                     }
-                } catch ( UnrecognizedOptionException e ) {
+                } catch ( final UnrecognizedOptionException e ) {
                     if ( !parser.doesAllowsUnrecognizedOptions() )
                         throw e;
                 }

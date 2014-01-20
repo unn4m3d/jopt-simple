@@ -45,21 +45,21 @@ final class ParserRules {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isShortOptionToken( String argument ) {
+    static boolean isShortOptionToken( final String argument ) {
         return argument.startsWith( HYPHEN )
             && !HYPHEN.equals( argument )
             && !isLongOptionToken( argument );
     }
 
-    static boolean isLongOptionToken( String argument ) {
+    static boolean isLongOptionToken( final String argument ) {
         return argument.startsWith( DOUBLE_HYPHEN ) && !isOptionTerminator( argument );
     }
 
-    static boolean isOptionTerminator( String argument ) {
+    static boolean isOptionTerminator( final String argument ) {
         return OPTION_TERMINATOR.equals( argument );
     }
 
-    static void ensureLegalOption( String option ) {
+    static void ensureLegalOption( final String option ) {
         if ( option.startsWith( HYPHEN ) )
             throw new IllegalOptionSpecificationException( String.valueOf( option ) );
 
@@ -67,18 +67,18 @@ final class ParserRules {
             ensureLegalOptionCharacter( option.charAt( i ) );
     }
 
-    static void ensureLegalOptions( Collection<String> options ) {
-        for ( String each : options )
+    static void ensureLegalOptions( final Collection<String> options ) {
+        for ( final String each : options )
             ensureLegalOption( each );
     }
 
-    private static void ensureLegalOptionCharacter( char option ) {
+    private static void ensureLegalOptionCharacter( final char option ) {
         if ( !( isLetterOrDigit( option ) || isAllowedPunctuation( option ) ) )
             throw new IllegalOptionSpecificationException( String.valueOf( option ) );
     }
 
-    private static boolean isAllowedPunctuation( char option ) {
-        String allowedPunctuation = "?." + HYPHEN_CHAR;
+    private static boolean isAllowedPunctuation( final char option ) {
+        final String allowedPunctuation = "?." + HYPHEN_CHAR;
         return allowedPunctuation.indexOf( option ) != -1;
     }
 }

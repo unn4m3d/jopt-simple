@@ -43,14 +43,14 @@ public class SingleHyphenTest extends AbstractOptionParserFixture {
 
     @Test
     public void singleHyphen() {
-        OptionSet options = parser.parse( "-" );
+        final OptionSet options = parser.parse( "-" );
 
         assertEquals( singletonList( "-" ), options.nonOptionArguments() );
     }
 
     @Test
     public void asArgumentOfOption() {
-        OptionSet options = parser.parse( "-o", "-" );
+        final OptionSet options = parser.parse( "-o", "-" );
 
         assertOptionDetected( options, "o" );
         assertEquals( singletonList( "-" ), options.valuesOf( "o" ) );
@@ -59,7 +59,7 @@ public class SingleHyphenTest extends AbstractOptionParserFixture {
 
     @Test
     public void asArgumentOfOptionInSameToken() {
-        OptionSet options = parser.parse( "-o-" );
+        final OptionSet options = parser.parse( "-o-" );
 
         assertOptionDetected( options, "o" );
         assertEquals( singletonList( "-" ), options.valuesOf( "o" ) );

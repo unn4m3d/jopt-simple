@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 import static java.util.Arrays.*;
 
-public class Strings {
-    public static String join( char delimiter, String... pieces ) {
-        StringBuilder builder = new StringBuilder();
+public final class Strings {
+    public static String join( final char delimiter, final String... pieces ) {
+        final StringBuilder builder = new StringBuilder();
 
-        for ( Iterator<String> iter = asList( pieces ).iterator(); iter.hasNext(); ) {
+        for ( final Iterator<String> iter = asList( pieces ).iterator(); iter.hasNext(); ) {
             builder.append( iter.next() );
             if ( iter.hasNext() )
                 builder.append( delimiter );

@@ -34,16 +34,16 @@ import java.util.Collection;
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
 class RequiredArgumentOptionSpec<V> extends ArgumentAcceptingOptionSpec<V> {
-    RequiredArgumentOptionSpec( String option ) {
+    RequiredArgumentOptionSpec( final String option ) {
         super( option, true );
     }
 
-    RequiredArgumentOptionSpec( Collection<String> options, String description ) {
+    RequiredArgumentOptionSpec( final Collection<String> options, final String description ) {
         super( options, true, description );
     }
 
     @Override
-    protected void detectOptionArgument( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions ) {
+    protected void detectOptionArgument( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions ) {
         if ( !arguments.hasMore() )
             throw new OptionMissingRequiredArgumentException( options() );
 

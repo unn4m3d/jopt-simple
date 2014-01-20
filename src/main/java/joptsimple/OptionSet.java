@@ -46,7 +46,7 @@ public class OptionSet {
     /*
      * Package-private because clients don't create these.
      */
-    OptionSet( Map<String, ? extends OptionSpec<?>> recognizedSpecs ) {
+    OptionSet( final Map<String, ? extends OptionSpec<?>> recognizedSpecs ) {
         detectedSpecs = new ArrayList<OptionSpec<?>>();
         detectedOptions = new HashMap<String, OptionSpec<?>>();
         optionsToArguments = new IdentityHashMap<OptionSpec<?>, List<String>>();
@@ -70,7 +70,7 @@ public class OptionSet {
      * @return {@code true} if the option was detected
      * @see #has(OptionSpec)
      */
-    public boolean has( String option ) {
+    public boolean has( final String option ) {
         return detectedOptions.containsKey( option );
     }
 
@@ -87,7 +87,7 @@ public class OptionSet {
      * @return {@code true} if the option was detected
      * @see #has(String)
      */
-    public boolean has( OptionSpec<?> option ) {
+    public boolean has( final OptionSpec<?> option ) {
         return optionsToArguments.containsKey( option );
     }
 
@@ -98,8 +98,8 @@ public class OptionSet {
      * @return {@code true} if the option was detected and at least one argument was detected for the option
      * @see #hasArgument(OptionSpec)
      */
-    public boolean hasArgument( String option ) {
-        OptionSpec<?> spec = detectedOptions.get( option );
+    public boolean hasArgument( final String option ) {
+        final OptionSpec<?> spec = detectedOptions.get( option );
         return spec != null && hasArgument( spec );
     }
 
@@ -117,10 +117,10 @@ public class OptionSet {
      * @throws NullPointerException if {@code option} is {@code null}
      * @see #hasArgument(String)
      */
-    public boolean hasArgument( OptionSpec<?> option ) {
+    public boolean hasArgument( final OptionSpec<?> option ) {
         ensureNotNull( option );
 
-        List<String> values = optionsToArguments.get( option );
+        final List<String> values = optionsToArguments.get( option );
         return values != null && !values.isEmpty();
     }
 
@@ -138,12 +138,12 @@ public class OptionSet {
      * @throws NullPointerException if {@code option} is {@code null}
      * @throws OptionException if more than one argument was detected for the option
      */
-    public Object valueOf( String option ) {
+    public Object valueOf( final String option ) {
         ensureNotNull( option );
 
-        OptionSpec<?> spec = detectedOptions.get( option );
+        final OptionSpec<?> spec = detectedOptions.get( option );
         if ( spec == null ) {
-            List<?> defaults = defaultValuesFor( option );
+            final List<?> defaults = defaultValuesFor( option );
             return defaults.isEmpty() ? null : defaults.get( 0 );
         }
 
@@ -163,10 +163,10 @@ public class OptionSet {
      * @throws NullPointerException if {@code option} is {@code null}
      * @throws ClassCastException if the arguments of this option are not of the expected type
      */
-    public <V> V valueOf( OptionSpec<V> option ) {
+    public <V> V valueOf( final OptionSpec<V> option ) {
         ensureNotNull( option );
 
-        List<V> values = valuesOf( option );
+        final List<V> values = valuesOf( option );
         switch ( values.size() ) {
             case 0:
                 return null;
@@ -186,10 +186,10 @@ public class OptionSet {
      * empty list if no such arguments are present, or if the option was not detected
      * @throws NullPointerException if {@code option} is {@code null}
      */
-    public List<?> valuesOf( String option ) {
+    public List<?> valuesOf( final String option ) {
         ensureNotNull( option );
 
-        OptionSpec<?> spec = detectedOptions.get( option );
+        final OptionSpec<?> spec = detectedOptions.get( option );
         return spec == null ? defaultValuesFor( option ) : valuesOf( spec );
     }
 
@@ -207,15 +207,15 @@ public class OptionSet {
      * @throws OptionException if there is a problem converting the option's arguments to the desired type; for
      * example, if the type does not implement a correct conversion constructor or method
      */
-    public <V> List<V> valuesOf( OptionSpec<V> option ) {
+    public <V> List<V> valuesOf( final OptionSpec<V> option ) {
         ensureNotNull( option );
 
-        List<String> values = optionsToArguments.get( option );
+        final List<String> values = optionsToArguments.get( option );
         if ( values == null || values.isEmpty() )
             return defaultValueFor( option );
 
-        List<V> convertedValues = new ArrayList<V>();
-        for ( String each : values )
+        final List<V> convertedValues = new ArrayList<V>();
+        for ( final String each : values )
             convertedValues.add( option.convert( each ) );
 
         return unmodifiableList( convertedValues );
@@ -228,7 +228,7 @@ public class OptionSet {
      * @return the set of detected command line options
      */
     public List<OptionSpec<?>> specs() {
-        List<OptionSpec<?>> specs = detectedSpecs;
+        final List<OptionSpec<?>> specs = detectedSpecs;
         specs.remove( detectedOptions.get( NonOptionArgumentSpec.NAME ) );
 
         return unmodifiableList( specs );
@@ -240,8 +240,8 @@ public class OptionSet {
      * @return the declared options as a map
      */
     public Map<OptionSpec<?>, List<?>> asMap() {
-        Map<OptionSpec<?>, List<?>> map = new HashMap<OptionSpec<?>, List<?>>();
-        for ( OptionSpec<?> spec : recognizedSpecs.values() )
+        final Map<OptionSpec<?>, List<?>> map = new HashMap<OptionSpec<?>, List<?>>();
+        for ( final OptionSpec<?> spec : recognizedSpecs.values() )
             if ( !spec.representsNonOptions() )
                 map.put( spec, valuesOf( spec ) );
         return unmodifiableMap( map );
@@ -255,14 +255,14 @@ public class OptionSet {
         return valuesOf( detectedOptions.get( NonOptionArgumentSpec.NAME ) );
     }
 
-    void add( OptionSpec<?> spec ) {
+    void add( final OptionSpec<?> spec ) {
         addWithArgument( spec, null );
     }
 
-    void addWithArgument( OptionSpec<?> spec, String argument ) {
+    void addWithArgument( final OptionSpec<?> spec, final String argument ) {
         detectedSpecs.add( spec );
 
-        for ( String each : spec.options() )
+        for ( final String each : spec.options() )
             detectedOptions.put( each, spec );
 
         List<String> optionArguments = optionsToArguments.get( spec );
@@ -277,17 +277,17 @@ public class OptionSet {
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         if ( this == that )
             return true;
 
         if ( that == null || !getClass().equals( that.getClass() ) )
             return false;
 
-        OptionSet other = (OptionSet) that;
-        Map<OptionSpec<?>, List<String>> thisOptionsToArguments =
+        final OptionSet other = (OptionSet) that;
+        final Map<OptionSpec<?>, List<String>> thisOptionsToArguments =
             new HashMap<OptionSpec<?>, List<String>>( optionsToArguments );
-        Map<OptionSpec<?>, List<String>> otherOptionsToArguments =
+        final Map<OptionSpec<?>, List<String>> otherOptionsToArguments =
             new HashMap<OptionSpec<?>, List<String>>( other.optionsToArguments );
         return detectedOptions.equals( other.detectedOptions )
             && thisOptionsToArguments.equals( otherOptionsToArguments );
@@ -295,26 +295,26 @@ public class OptionSet {
 
     @Override
     public int hashCode() {
-        Map<OptionSpec<?>, List<String>> thisOptionsToArguments =
+        final Map<OptionSpec<?>, List<String>> thisOptionsToArguments =
             new HashMap<OptionSpec<?>, List<String>>( optionsToArguments );
         return detectedOptions.hashCode() ^ thisOptionsToArguments.hashCode();
     }
 
     @SuppressWarnings( "unchecked" )
-    private <V> List<V> defaultValuesFor( String option ) {
+    private <V> List<V> defaultValuesFor( final String option ) {
         if ( defaultValues.containsKey( option ) )
             return (List<V>) defaultValues.get( option );
 
         return emptyList();
     }
 
-    private <V> List<V> defaultValueFor( OptionSpec<V> option ) {
+    private <V> List<V> defaultValueFor( final OptionSpec<V> option ) {
         return defaultValuesFor( option.options().iterator().next() );
     }
 
-    private static Map<String, List<?>> defaultValues( Map<String, ? extends OptionSpec<?>> recognizedSpecs ) {
-        Map<String, List<?>> defaults = new HashMap<String, List<?>>();
-        for ( Map.Entry<String, ? extends OptionSpec<?>> each : recognizedSpecs.entrySet() )
+    private static Map<String, List<?>> defaultValues( final Map<String, ? extends OptionSpec<?>> recognizedSpecs ) {
+        final Map<String, List<?>> defaults = new HashMap<String, List<?>>();
+        for ( final Map.Entry<String, ? extends OptionSpec<?>> each : recognizedSpecs.entrySet() )
             defaults.put( each.getKey(), each.getValue().defaultValues() );
         return defaults;
     }

@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 public class ShortOptionsWithArgumentPositioningTest {
     @Test
     public void allowsDifferentFormsOfPairingArgumentWithOption() {
-        OptionParser parser = new OptionParser( "a:b:c::" );
+        final OptionParser parser = new OptionParser( "a:b:c::" );
 
-        OptionSet options = parser.parse( "-a", "foo", "-bbar", "-c=baz" );
+        final OptionSet options = parser.parse( "-a", "foo", "-bbar", "-c=baz" );
 
         assertTrue( options.has( "a" ) );
         assertTrue( options.hasArgument( "a" ) );

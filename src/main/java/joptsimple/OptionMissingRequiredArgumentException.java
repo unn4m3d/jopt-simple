@@ -35,7 +35,7 @@ import java.util.Collection;
 class OptionMissingRequiredArgumentException extends OptionException {
     private static final long serialVersionUID = -1L;
 
-    OptionMissingRequiredArgumentException( Collection<String> options ) {
+    OptionMissingRequiredArgumentException( final Collection<String> options ) {
         super( options );
     }
 

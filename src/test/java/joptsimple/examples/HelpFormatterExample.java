@@ -11,23 +11,23 @@ import static java.io.File.pathSeparatorChar;
 import static java.util.Arrays.asList;
 import static joptsimple.util.DateConverter.datePattern;
 
-public class HelpFormatterExample {
+public final class HelpFormatterExample {
     static class MyFormatter implements HelpFormatter {
         public String format( final OptionParser optionParser ) {
-            StringBuilder buffer = new StringBuilder();
-            for ( OptionDescriptor each : new HashSet<OptionDescriptor>( optionParser.recognizedOptions().values() ) ) {
+            final StringBuilder buffer = new StringBuilder();
+            for ( final OptionDescriptor each : new HashSet<OptionDescriptor>( optionParser.recognizedOptions().values() ) ) {
                 buffer.append( lineFor( each ) );
             }
             return buffer.toString();
         }
 
-        private String lineFor( OptionDescriptor descriptor ) {
+        private String lineFor( final OptionDescriptor descriptor ) {
             if ( descriptor.representsNonOptions() ) {
                 return descriptor.argumentDescription() + '(' + descriptor.argumentTypeIndicator() + "): "
                     + descriptor.description() + System.getProperty( "line.separator" );
             }
 
-            StringBuilder line = new StringBuilder( descriptor.options().toString() );
+            final StringBuilder line = new StringBuilder( descriptor.options().toString() );
             line.append( ": description = " ).append( descriptor.description() );
             line.append( ", required = " ).append( descriptor.isRequired() );
             line.append( ", accepts arguments = " ).append( descriptor.acceptsArguments() );
@@ -40,8 +40,8 @@ public class HelpFormatterExample {
         }
     }
 
-    public static void main( String[] args ) throws Exception {
-        OptionParser parser = new OptionParser() {
+    public static void main( final String[] args ) throws Exception {
+        final OptionParser parser = new OptionParser() {
             {
                 accepts( "c" ).withRequiredArg().ofType( Integer.class )
                     .describedAs( "count" ).defaultsTo( 1 );

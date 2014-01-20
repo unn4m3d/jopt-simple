@@ -32,7 +32,7 @@ import static java.util.Arrays.*;
  */
 public class OptionSpecBuilderOptionsImmutabilityTest extends AbstractOptionSpecOptionsImmutabilityTestCase {
     @Override
-    protected AbstractOptionSpec<?> newOptionSpec( String option ) {
+    protected AbstractOptionSpec<?> newOptionSpec( final String option ) {
         return new OptionSpecBuilder( new OptionParser(), asList( option ), "" );
     }
 }

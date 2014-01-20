@@ -28,7 +28,7 @@ public class OptionSetAsMapTest extends AbstractOptionParserFixture {
         final OptionSpec<String> g = parser.accepts( "g" ).withOptionalArg().defaultsTo( "4" );
         final OptionSpec<Void> h = parser.accepts( "h" );
 
-        OptionSet options = parser.parse( "-a", "-e", "-c", "5", "-d", "6", "-b", "4", "-d", "7", "-e", "8" );
+        final OptionSet options = parser.parse( "-a", "-e", "-c", "5", "-d", "6", "-b", "4", "-d", "7", "-e", "8" );
 
         final Map<OptionSpec<?>, List<?>> expected = new HashMap<OptionSpec<?>, List<?>>() {
             {

@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 public class UnrecognizedOptionsAllowedTest {
     @Test
     public void acceptsLongOptions() {
-        OptionParser parser = new OptionParser();
+        final OptionParser parser = new OptionParser();
         parser.allowsUnrecognizedOptions();
         parser.accepts( "f" );
 
-        OptionSet options = parser.parse( "-f", "-d" );
+        final OptionSet options = parser.parse( "-f", "-d" );
 
         assertTrue( options.has( "f" ) );
         assertFalse( options.has( "d" ) );

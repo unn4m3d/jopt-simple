@@ -43,7 +43,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingConstructorQuietlyWrapsInstantiationException() throws Exception {
-        Constructor<AbstractProblematic> constructor = AbstractProblematic.class.getDeclaredConstructor();
+        final Constructor<AbstractProblematic> constructor = AbstractProblematic.class.getDeclaredConstructor();
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( InstantiationException.class.getName() );
@@ -53,7 +53,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingConstructorQuietlyWrapsIllegalAccessException() throws Exception {
-        Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor();
+        final Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor();
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( IllegalAccessException.class.getName() );
@@ -63,7 +63,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingConstructorQuietlyWrapsCauseOfInvocationTargetException() throws Exception {
-        Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor( String.class );
+        final Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor( String.class );
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( IllegalStateException.class.getName() );
@@ -73,7 +73,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingConstructorQuietlyWrapsIllegalArgumentException() throws Exception {
-        Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor(String.class);
+        final Constructor<Problematic> constructor = Problematic.class.getDeclaredConstructor(String.class);
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( IllegalArgumentException.class.getName() );
@@ -83,7 +83,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingStaticMethodQuietlyWrapsIllegalAccessException() throws Exception {
-        Method method = Problematic.class.getDeclaredMethod( "boo" );
+        final Method method = Problematic.class.getDeclaredMethod( "boo" );
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( IllegalAccessException.class.getName() );
@@ -93,7 +93,7 @@ public class ReflectionTest {
 
     @Test
     public void invokingStaticMethodQuietlyWrapsIllegalArgumentException() throws Exception {
-        Method method = Problematic.class.getDeclaredMethod( "mute" );
+        final Method method = Problematic.class.getDeclaredMethod( "mute" );
 
         thrown.expect( ReflectionException.class );
         thrown.expectMessage( IllegalArgumentException.class.getName() );

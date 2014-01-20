@@ -74,7 +74,7 @@ public class AbbreviationMap<V> {
      * @return {@code true} if {@code key} is present in the map
      * @throws NullPointerException if {@code key} is {@code null}
      */
-    public boolean contains( String aKey ) {
+    public boolean contains( final String aKey ) {
         return get( aKey ) != null;
     }
 
@@ -87,11 +87,11 @@ public class AbbreviationMap<V> {
      * such value or {@code aKey} is not a unique abbreviation of a key in the map
      * @throws NullPointerException if {@code aKey} is {@code null}
      */
-    public V get( String aKey ) {
-        char[] chars = charsOf( aKey );
+    public V get( final String aKey ) {
+        final char[] chars = charsOf( aKey );
 
         AbbreviationMap<V> child = this;
-        for ( char each : chars ) {
+        for ( final char each : chars ) {
             child = child.children.get( each );
             if ( child == null )
                 return null;
@@ -109,13 +109,13 @@ public class AbbreviationMap<V> {
      * @throws NullPointerException if {@code aKey} or {@code newValue} is {@code null}
      * @throws IllegalArgumentException if {@code aKey} is a zero-length string
      */
-    public void put( String aKey, V newValue ) {
+    public void put( final String aKey, final V newValue ) {
         if ( newValue == null )
             throw new NullPointerException();
         if ( aKey.length() == 0 )
             throw new IllegalArgumentException();
 
-        char[] chars = charsOf( aKey );
+        final char[] chars = charsOf( aKey );
         add( chars, newValue, 0, chars.length );
     }
 
@@ -128,27 +128,27 @@ public class AbbreviationMap<V> {
      * @throws NullPointerException if {@code keys} or {@code newValue} is {@code null}
      * @throws IllegalArgumentException if any of {@code keys} is a zero-length string
      */
-    public void putAll( Iterable<String> keys, V newValue ) {
-        for ( String each : keys )
+    public void putAll( final Iterable<String> keys, final V newValue ) {
+        for ( final String each : keys )
             put( each, newValue );
     }
 
-    private boolean add( char[] chars, V newValue, int offset, int length ) {
+    private boolean add( final char[] chars, final V newValue, final int offset, final int length ) {
         if ( offset == length ) {
             value = newValue;
-            boolean wasAlreadyAKey = key != null;
+            final boolean wasAlreadyAKey = key != null;
             key = new String( chars );
             return !wasAlreadyAKey;
         }
 
-        char nextChar = chars[ offset ];
+        final char nextChar = chars[ offset ];
         AbbreviationMap<V> child = children.get( nextChar );
         if ( child == null ) {
             child = new AbbreviationMap<V>();
             children.put( nextChar, child );
         }
 
-        boolean newKeyAdded = child.add( chars, newValue, offset + 1, length );
+        final boolean newKeyAdded = child.add( chars, newValue, offset + 1, length );
 
         if ( newKeyAdded )
             ++keysBeyond;
@@ -166,20 +166,20 @@ public class AbbreviationMap<V> {
      * @throws NullPointerException if {@code aKey} is {@code null}
      * @throws IllegalArgumentException if {@code aKey} is a zero-length string
      */
-    public void remove( String aKey ) {
+    public void remove( final String aKey ) {
         if ( aKey.length() == 0 )
             throw new IllegalArgumentException();
 
-        char[] keyChars = charsOf( aKey );
+        final char[] keyChars = charsOf( aKey );
         remove( keyChars, 0, keyChars.length );
     }
 
-    private boolean remove( char[] aKey, int offset, int length ) {
+    private boolean remove( final char[] aKey, final int offset, final int length ) {
         if ( offset == length )
             return removeAtEndOfKey();
 
-        char nextChar = aKey[ offset ];
-        AbbreviationMap<V> child = children.get( nextChar );
+        final char nextChar = aKey[ offset ];
+        final AbbreviationMap<V> child = children.get( nextChar );
         if ( child == null || !child.remove( aKey, offset + 1, length ) )
             return false;
 
@@ -193,8 +193,8 @@ public class AbbreviationMap<V> {
     }
 
     private void setValueToThatOfOnlyChild() {
-        Map.Entry<Character, AbbreviationMap<V>> entry = children.entrySet().iterator().next();
-        AbbreviationMap<V> onlyChild = entry.getValue();
+        final Map.Entry<Character, AbbreviationMap<V>> entry = children.entrySet().iterator().next();
+        final AbbreviationMap<V> onlyChild = entry.getValue();
         value = onlyChild.value;
     }
 
@@ -217,7 +217,7 @@ public class AbbreviationMap<V> {
      * @return a Java map corresponding to this abbreviation map
      */
     public Map<String, V> toJavaUtilMap() {
-        Map<String, V> mappings = new TreeMap<String, V>();
+        final Map<String, V> mappings = new TreeMap<String, V>();
         addToMappings( mappings );
         return mappings;
     }
@@ -228,24 +228,24 @@ public class AbbreviationMap<V> {
         return values;
     }
 
-    private void addToMappings( Map<String, V> mappings ) {
+    private void addToMappings( final Map<String, V> mappings ) {
         if ( key != null )
             mappings.put( key, value );
 
-        for ( AbbreviationMap<V> each : children.values() )
+        for ( final AbbreviationMap<V> each : children.values() )
             each.addToMappings( mappings );
     }
 
-    private void addToValues( Collection<V> values ) {
+    private void addToValues( final Collection<V> values ) {
         if ( key != null )
             values.add( value );
 
-        for ( AbbreviationMap<V> each : children.values() )
+        for ( final AbbreviationMap<V> each : children.values() )
             each.addToValues( values );
     }
 
-    private static char[] charsOf( String aKey ) {
-        char[] chars = new char[ aKey.length() ];
+    private static char[] charsOf( final String aKey ) {
+        final char[] chars = new char[ aKey.length() ];
         aKey.getChars( 0, aKey.length(), chars, 0 );
         return chars;
     }

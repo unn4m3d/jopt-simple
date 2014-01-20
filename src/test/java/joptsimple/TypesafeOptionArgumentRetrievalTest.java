@@ -45,27 +45,27 @@ import static org.junit.Assert.assertTrue;
 public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFixture {
     @Test
     public void retrievalOfTypedRequiredArgumentsInATypesafeManner() {
-        OptionSpec<Integer> optionA = parser.accepts( "a" ).withRequiredArg().ofType( Integer.class );
+        final OptionSpec<Integer> optionA = parser.accepts( "a" ).withRequiredArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-a", "1" );
+        final OptionSet options = parser.parse( "-a", "1" );
 
         assertTrue( options.has( optionA ) );
-        Integer valueFromOption = optionA.value( options );
+        final Integer valueFromOption = optionA.value( options );
         assertEquals( Integer.valueOf( 1 ), valueFromOption );
-        Integer valueFromOptionSet = options.valueOf( optionA );
+        final Integer valueFromOptionSet = options.valueOf( optionA );
         assertEquals( valueFromOption, valueFromOptionSet );
 
-        List<Integer> valuesFromOption = optionA.values( options );
+        final List<Integer> valuesFromOption = optionA.values( options );
         assertEquals( asList( 1 ), valuesFromOption );
-        List<Integer> valuesFromOptionSet = options.valuesOf( optionA );
+        final List<Integer> valuesFromOptionSet = options.valuesOf( optionA );
         assertEquals( valuesFromOption, valuesFromOptionSet );
     }
 
     @Test
     public void retrievalOfTypedOptionalArgumentsInATypesafeManner() {
-        OptionSpec<Double> optionB = parser.accepts( "b" ).withOptionalArg().ofType( Double.class );
+        final OptionSpec<Double> optionB = parser.accepts( "b" ).withOptionalArg().ofType( Double.class );
 
-        OptionSet options = parser.parse( "-b", "3.14D" );
+        final OptionSet options = parser.parse( "-b", "3.14D" );
 
         assertTrue( options.has( optionB ) );
         assertEquals( Double.valueOf( 3.14D ), optionB.value( options ) );
@@ -74,9 +74,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void retrievalOfUntypedRequiredArgumentsInATypesafeManner() {
-        OptionSpec<String> optionC = parser.accepts( "c" ).withRequiredArg();
+        final OptionSpec<String> optionC = parser.accepts( "c" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-c", "foo", "-c", "bar" );
+        final OptionSet options = parser.parse( "-c", "foo", "-c", "bar" );
 
         assertTrue( options.has( optionC ) );
         assertEquals( asList( "foo", "bar" ), optionC.values( options ) );
@@ -84,22 +84,22 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void retrievalOfUntypedOptionalArgumentsInATypesafeManner() {
-        OptionSpec<String> optionD = parser.accepts( "d" ).withRequiredArg();
+        final OptionSpec<String> optionD = parser.accepts( "d" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-d", "foo", "-d", "bar", "-d", "baz" );
+        final OptionSet options = parser.parse( "-d", "foo", "-d", "bar", "-d", "baz" );
 
         assertTrue( options.has( optionD ) );
-        List<String> valuesFromOption = optionD.values( options );
+        final List<String> valuesFromOption = optionD.values( options );
         assertEquals( asList( "foo", "bar", "baz" ), valuesFromOption );
-        List<String> valuesFromOptionSet = options.valuesOf( optionD );
+        final List<String> valuesFromOptionSet = options.valuesOf( optionD );
         assertEquals( valuesFromOption, valuesFromOptionSet );
     }
 
     @Test
     public void retrievalWithVoidOption() {
-        OptionSpec<Void> optionE = parser.accepts( "e" );
+        final OptionSpec<Void> optionE = parser.accepts( "e" );
 
-        OptionSet options = parser.parse( "-e" );
+        final OptionSet options = parser.parse( "-e" );
 
         assertTrue( options.has( optionE ) );
         assertEquals( emptyList(), options.valuesOf( optionE ) );
@@ -107,9 +107,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveBooleanAllowedAsTypeSpecifier() {
-        OptionSpec<Boolean> optionA = parser.accepts( "a" ).withRequiredArg().ofType( boolean.class );
+        final OptionSpec<Boolean> optionA = parser.accepts( "a" ).withRequiredArg().ofType( boolean.class );
 
-        OptionSet options = parser.parse( "-a", "false" );
+        final OptionSet options = parser.parse( "-a", "false" );
 
         assertTrue( options.has( optionA ) );
         assertEquals( asList( false ), options.valuesOf( optionA ) );
@@ -117,9 +117,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveByteAllowedAsTypeSpecifier() {
-        OptionSpec<Byte> optionB = parser.accepts( "b" ).withOptionalArg().ofType( byte.class );
+        final OptionSpec<Byte> optionB = parser.accepts( "b" ).withOptionalArg().ofType( byte.class );
 
-        OptionSet options = parser.parse( "-b", "3" );
+        final OptionSet options = parser.parse( "-b", "3" );
 
         assertTrue( options.has( optionB ) );
         assertEquals( asList( Byte.valueOf( "3" ) ), options.valuesOf( optionB ) );
@@ -132,9 +132,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveDoubleAllowedAsTypeSpecifier() {
-        OptionSpec<Double> optionD = parser.accepts( "d" ).withOptionalArg().ofType( double.class );
+        final OptionSpec<Double> optionD = parser.accepts( "d" ).withOptionalArg().ofType( double.class );
 
-        OptionSet options = parser.parse( "-d", "3.1" );
+        final OptionSet options = parser.parse( "-d", "3.1" );
 
         assertTrue( options.has( optionD ) );
         assertEquals( asList( 3.1D ), options.valuesOf( optionD ) );
@@ -142,9 +142,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveFloatAllowedAsTypeSpecifier() {
-        OptionSpec<Float> optionE = parser.accepts( "e" ).withRequiredArg().ofType( float.class );
+        final OptionSpec<Float> optionE = parser.accepts( "e" ).withRequiredArg().ofType( float.class );
 
-        OptionSet options = parser.parse( "-e", "2.09" );
+        final OptionSet options = parser.parse( "-e", "2.09" );
 
         assertTrue( options.has( optionE ) );
         assertEquals( asList( 2.09F ), options.valuesOf( optionE ) );
@@ -152,9 +152,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveIntAllowedAsTypeSpecifier() {
-        OptionSpec<Integer> optionF = parser.accepts( "F" ).withRequiredArg().ofType( int.class );
+        final OptionSpec<Integer> optionF = parser.accepts( "F" ).withRequiredArg().ofType( int.class );
 
-        OptionSet options = parser.parse( "-F", "91" );
+        final OptionSet options = parser.parse( "-F", "91" );
 
         assertTrue( options.has( optionF ) );
         assertEquals( asList( 91 ), options.valuesOf( optionF ) );
@@ -162,9 +162,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveLongAllowedAsTypeSpecifier() {
-        OptionSpec<Long> optionG = parser.accepts( "g" ).withOptionalArg().ofType( long.class );
+        final OptionSpec<Long> optionG = parser.accepts( "g" ).withOptionalArg().ofType( long.class );
 
-        OptionSet options = parser.parse("-g", "12");
+        final OptionSet options = parser.parse("-g", "12");
 
         assertTrue( options.has( optionG ) );
         assertEquals( asList( 12L ), options.valuesOf( optionG ) );
@@ -172,9 +172,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
 
     @Test
     public void primitiveShortAllowedAsTypeSpecifier() {
-        OptionSpec<Short> optionH = parser.accepts( "H" ).withRequiredArg().ofType( short.class );
+        final OptionSpec<Short> optionH = parser.accepts( "H" ).withRequiredArg().ofType( short.class );
 
-        OptionSet options = parser.parse( "-H", "8" );
+        final OptionSet options = parser.parse( "-H", "8" );
 
         assertTrue( options.has( optionH ) );
         assertEquals( asList( Short.valueOf( "8" ) ), options.valuesOf( optionH ) );
@@ -184,7 +184,7 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
     public void cannotFoolHasWithAnOptionNotIssuedFromBuilder() {
         parser.accepts( "e" );
 
-        OptionSet options = parser.parse( "-e" );
+        final OptionSet options = parser.parse( "-e" );
 
         assertFalse( options.has( new FakeOptionSpec<Void>( "e" ) ) );
     }
@@ -192,9 +192,9 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
     @Test
     public void cannotFoolHasArgumentWithAnOptionNotIssuedFromBuilder() {
         parser.accepts( "f" ).withRequiredArg();
-        OptionSpec<String> fakeOptionF = new FakeOptionSpec<String>( "f" );
+        final OptionSpec<String> fakeOptionF = new FakeOptionSpec<String>( "f" );
 
-        OptionSet options = parser.parse( "-f", "boo" );
+        final OptionSet options = parser.parse( "-f", "boo" );
 
         assertFalse( options.hasArgument( fakeOptionF ) );
     }
@@ -203,7 +203,7 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
     public void cannotFoolValueOfWithAnOptionNotIssuedFromBuilder() {
         parser.accepts( "g" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-g", "foo" );
+        final OptionSet options = parser.parse( "-g", "foo" );
 
         assertNull( options.valueOf( new FakeOptionSpec<String>( "g" ) ) );
     }
@@ -212,47 +212,45 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
     public void cannotFoolValuesOfWithAnOptionNotIssuedFromBuilder() {
         parser.accepts( "h" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-h", "foo", "-h", "bar" );
+        final OptionSet options = parser.parse( "-h", "foo", "-h", "bar" );
 
         assertEquals( emptyList(), options.valuesOf( new FakeOptionSpec<String>( "h" ) ) );
     }
 
     @Test( expected = ClassCastException.class )
     public void canSubvertTypeSafetyIfYouUseAnOptionSpecAsTheWrongType() {
-        ArgumentAcceptingOptionSpec<String> optionI = parser.accepts( "i" ).withRequiredArg();
+        final ArgumentAcceptingOptionSpec<String> optionI = parser.accepts( "i" ).withRequiredArg();
         optionI.ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-i", "2" );
+        final OptionSet options = parser.parse( "-i", "2" );
 
-        @SuppressWarnings( "unused" )
-        String value = optionI.value( options );
+        @SuppressWarnings( "unused" ) final String value = optionI.value( options );
     }
 
     @Test( expected = ClassCastException.class )
     public void canSubvertTypeSafetyIfYouGiveAnOptionSpecToOptionSetAsTheWrongType() {
-        ArgumentAcceptingOptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
+        final ArgumentAcceptingOptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
         optionJ.ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-j", "3" );
+        final OptionSet options = parser.parse( "-j", "3" );
 
-        @SuppressWarnings( "unused" )
-        String value = options.valuesOf( optionJ ).get( 0 );
+        @SuppressWarnings( "unused" ) final String value = options.valuesOf( optionJ ).get( 0 );
     }
 
     @Test
     public void canUseBooleanType() {
-        OptionSpec<Boolean> optionK = parser.accepts( "k" ).withRequiredArg().ofType( Boolean.class );
+        final OptionSpec<Boolean> optionK = parser.accepts( "k" ).withRequiredArg().ofType( Boolean.class );
 
-        OptionSet options = parser.parse( "-k", "true" );
+        final OptionSet options = parser.parse( "-k", "true" );
 
         assertTrue( optionK.value( options ) );
     }
 
     @Test
     public void usesConverterIfProvided() {
-        OptionSpec<Short> optionL = parser.accepts( "L" ).withRequiredArg().withValuesConvertedBy(
+        final OptionSpec<Short> optionL = parser.accepts( "L" ).withRequiredArg().withValuesConvertedBy(
             new ValueConverter<Short>() {
-                public Short convert( String value ) {
+                public Short convert( final String value ) {
                     return parseShort( value );
                 }
 
@@ -265,16 +263,16 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
                 }
             } );
 
-        OptionSet options = parser.parse( "-L", "34" );
+        final OptionSet options = parser.parse( "-L", "34" );
 
         assertEquals( new Short( (short) 34 ), optionL.value( options ) );
     }
 
     @Test
     public void wrapsValueConversionExceptionsRaisedByConverter() {
-        OptionSpec<Character> optionM = parser.accepts( "m" ).withRequiredArg().withValuesConvertedBy(
+        final OptionSpec<Character> optionM = parser.accepts( "m" ).withRequiredArg().withValuesConvertedBy(
             new ValueConverter<Character>() {
-                public Character convert( String value ) {
+                public Character convert( final String value ) {
                     throw new ValueConversionException( value );
                 }
 
@@ -287,7 +285,7 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
                 }
             } );
 
-        OptionSet options = parser.parse( "-m", "a" );
+        final OptionSet options = parser.parse( "-m", "a" );
 
         thrown.expect( OptionArgumentConversionException.class );
         thrown.expect( withCauseOfType( ValueConversionException.class ) );
@@ -298,7 +296,7 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
     private static class FakeOptionSpec<V> implements OptionSpec<V> {
         private final String option;
 
-        FakeOptionSpec( String option ) {
+        FakeOptionSpec( final String option ) {
             this.option = option;
         }
 
@@ -338,11 +336,11 @@ public class TypesafeOptionArgumentRetrievalTest extends AbstractOptionParserFix
             return false;
         }
 
-        public V value( OptionSet detectedOptions ) {
+        public V value( final OptionSet detectedOptions ) {
             return detectedOptions.valueOf( this );
         }
 
-        public List<V> values( OptionSet detectedOptions ) {
+        public List<V> values( final OptionSet detectedOptions ) {
             return detectedOptions.valuesOf( this );
         }
 

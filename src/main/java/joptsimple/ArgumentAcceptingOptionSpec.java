@@ -65,13 +65,13 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
     private String valueSeparator = String.valueOf( NIL_VALUE_SEPARATOR );
     private final List<V> defaultValues = new ArrayList<V>();
 
-    ArgumentAcceptingOptionSpec( String option, boolean argumentRequired ) {
+    ArgumentAcceptingOptionSpec( final String option, final boolean argumentRequired ) {
         super( option );
 
         this.argumentRequired = argumentRequired;
     }
 
-    ArgumentAcceptingOptionSpec( Collection<String> options, boolean argumentRequired, String description ) {
+    ArgumentAcceptingOptionSpec( final Collection<String> options, final boolean argumentRequired, final String description ) {
         super( options, description );
 
         this.argumentRequired = argumentRequired;
@@ -102,7 +102,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @throws NullPointerException if the type is {@code null}
      * @throws IllegalArgumentException if the type does not have the standard conversion methods
      */
-    public final <T> ArgumentAcceptingOptionSpec<T> ofType( Class<T> argumentType ) {
+    public final <T> ArgumentAcceptingOptionSpec<T> ofType( final Class<T> argumentType ) {
         return withValuesConvertedBy( findConverter( argumentType ) );
     }
 
@@ -119,7 +119,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @throws NullPointerException if the converter is {@code null}
      */
     @SuppressWarnings( "unchecked" )
-    public final <T> ArgumentAcceptingOptionSpec<T> withValuesConvertedBy( ValueConverter<T> aConverter ) {
+    public final <T> ArgumentAcceptingOptionSpec<T> withValuesConvertedBy( final ValueConverter<T> aConverter ) {
         if ( aConverter == null )
             throw new NullPointerException( "illegal null converter" );
 
@@ -134,7 +134,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @param description describes the nature of the argument of this spec's option
      * @return self, so that the caller can add clauses to the fluent interface sentence
      */
-    public final ArgumentAcceptingOptionSpec<V> describedAs( String description ) {
+    public final ArgumentAcceptingOptionSpec<V> describedAs( final String description ) {
         argumentDescription = description;
         return this;
     }
@@ -160,7 +160,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @return self, so that the caller can add clauses to the fluent interface sentence
      * @throws IllegalArgumentException if the separator is Unicode U+0000
      */
-    public final ArgumentAcceptingOptionSpec<V> withValuesSeparatedBy( char separator ) {
+    public final ArgumentAcceptingOptionSpec<V> withValuesSeparatedBy( final char separator ) {
         if ( separator == NIL_VALUE_SEPARATOR )
             throw new IllegalArgumentException( "cannot use U+0000 as separator" );
 
@@ -189,7 +189,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @return self, so that the caller can add clauses to the fluent interface sentence
      * @throws IllegalArgumentException if the separator contains Unicode U+0000
      */
-    public final ArgumentAcceptingOptionSpec<V> withValuesSeparatedBy( String separator ) {
+    public final ArgumentAcceptingOptionSpec<V> withValuesSeparatedBy( final String separator ) {
         if ( separator.indexOf( NIL_VALUE_SEPARATOR ) != -1 )
             throw new IllegalArgumentException( "cannot use U+0000 in separator" );
 
@@ -206,7 +206,7 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @throws NullPointerException if {@code value}, {@code values}, or any elements of {@code values} are
      * {@code null}
      */
-    public ArgumentAcceptingOptionSpec<V> defaultsTo( V value, V... values ) {
+    public ArgumentAcceptingOptionSpec<V> defaultsTo( final V value, final V... values ) {
         addDefaultValue( value );
         defaultsTo( values );
 
@@ -220,8 +220,8 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
      * @return self, so that the caller can add clauses to the fluent interface sentence
      * @throws NullPointerException if {@code values} or any elements of {@code values} are {@code null}
      */
-    public ArgumentAcceptingOptionSpec<V> defaultsTo( V[] values ) {
-        for ( V each : values )
+    public ArgumentAcceptingOptionSpec<V> defaultsTo( final V[] values ) {
+        for ( final V each : values )
             addDefaultValue( each );
 
         return this;
@@ -243,14 +243,14 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
         return optionRequired;
     }
 
-    private void addDefaultValue( V value ) {
+    private void addDefaultValue( final V value ) {
         ensureNotNull( value );
         defaultValues.add( value );
     }
 
     @Override
-    final void handleOption( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions,
-        String detectedArgument ) {
+    final void handleOption( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions,
+        final String detectedArgument ) {
 
         if ( isNullOrEmpty( detectedArgument ) )
             detectOptionArgument( parser, arguments, detectedOptions );
@@ -258,8 +258,8 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
             addArguments( detectedOptions, detectedArgument );
     }
 
-    protected void addArguments( OptionSet detectedOptions, String detectedArgument ) {
-        StringTokenizer lexer = new StringTokenizer( detectedArgument, valueSeparator );
+    protected void addArguments( final OptionSet detectedOptions, final String detectedArgument ) {
+        final StringTokenizer lexer = new StringTokenizer( detectedArgument, valueSeparator );
         if ( !lexer.hasMoreTokens() )
             detectedOptions.addWithArgument( this, detectedArgument );
         else {
@@ -271,19 +271,19 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
     protected abstract void detectOptionArgument( OptionParser parser, ArgumentList arguments,
         OptionSet detectedOptions );
 
-    public final V convert( String argument ) {
+    public final V convert( final String argument ) {
         return convertWith( converter, argument );
     }
 
-    protected boolean canConvertArgument( String argument ) {
-        StringTokenizer lexer = new StringTokenizer( argument, valueSeparator );
+    protected boolean canConvertArgument( final String argument ) {
+        final StringTokenizer lexer = new StringTokenizer( argument, valueSeparator );
 
         try {
             while ( lexer.hasMoreTokens() )
                 convert( lexer.nextToken() );
             return true;
         }
-        catch ( OptionException ignored ) {
+        catch ( final OptionException ignored ) {
             return false;
         }
     }
@@ -313,11 +313,11 @@ public abstract class ArgumentAcceptingOptionSpec<V> extends AbstractOptionSpec<
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         if ( !super.equals( that ) )
             return false;
 
-        ArgumentAcceptingOptionSpec<?> other = (ArgumentAcceptingOptionSpec<?>) that;
+        final ArgumentAcceptingOptionSpec<?> other = (ArgumentAcceptingOptionSpec<?>) that;
         return requiresArgument() == other.requiresArgument();
     }
 

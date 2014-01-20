@@ -46,7 +46,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentSeparate() {
-        OptionSet options = parser.parse( "--quiet", "23" );
+        final OptionSet options = parser.parse( "--quiet", "23" );
 
         assertOptionDetected( options, "quiet" );
         assertEquals( singletonList( "23" ), options.valuesOf( "quiet" ) );
@@ -55,7 +55,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentFollowedByLegalOption() {
-        OptionSet options = parser.parse( "--quiet", "-a" );
+        final OptionSet options = parser.parse( "--quiet", "-a" );
 
         assertOptionDetected( options, "quiet" );
         assertOptionNotDetected( options, "a" );
@@ -65,7 +65,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentTogether() {
-        OptionSet options = parser.parse( "--quiet=23" );
+        final OptionSet options = parser.parse( "--quiet=23" );
 
         assertOptionDetected( options, "quiet" );
         assertEquals( singletonList( "23" ), options.valuesOf( "quiet" ) );
@@ -82,7 +82,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void shortOptionSpecifiedAsLongOptionWithArgument() {
-        OptionSet options = parser.parse( "--y=bar" );
+        final OptionSet options = parser.parse( "--y=bar" );
 
         assertOptionDetected( options, "y" );
         assertEquals( singletonList( "bar" ), options.valuesOf( "y" ) );
@@ -91,7 +91,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void whenEndOfOptionsMarkerIsInPlaceOfRequiredArgument() {
-        OptionSet options = parser.parse( "--quiet", "--", "-y", "foo", "-a" );
+        final OptionSet options = parser.parse( "--quiet", "--", "-y", "foo", "-a" );
 
         assertOptionDetected( options, "quiet" );
         assertOptionDetected( options, "y" );

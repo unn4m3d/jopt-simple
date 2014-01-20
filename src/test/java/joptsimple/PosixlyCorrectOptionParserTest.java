@@ -42,7 +42,7 @@ import static org.junit.Assert.*;
 public class PosixlyCorrectOptionParserTest {
     private final OptionParser parser;
 
-    public PosixlyCorrectOptionParserTest( OptionParser parser ) {
+    public PosixlyCorrectOptionParserTest( final OptionParser parser ) {
         this.parser = parser;
     }
 
@@ -60,7 +60,7 @@ public class PosixlyCorrectOptionParserTest {
 
     @Test
     public void parseWithPosixlyCorrect() {
-        OptionSet options =
+        final OptionSet options =
             parser.parse( "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "yermom" );
 
         assertTrue( "i?", options.has( "i" ) );

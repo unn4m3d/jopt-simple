@@ -71,8 +71,8 @@ public class OptionSynonymRequiredArgumentTest extends AbstractOptionParserFixtu
         assertDetections( new String[] { "-N", "1", "-aft", "2", "--ne", "3" }, asList( 1, 2, 3 ) );
     }
 
-    private void assertDetections( String[] args, List<?> optionArguments ) {
-        OptionSet options = parser.parse( args );
+    private void assertDetections( final String[] args, final List<?> optionArguments ) {
+        final OptionSet options = parser.parse( args );
 
         assertEquals( optionArguments, options.valuesOf( "N" ) );
         assertEquals( optionArguments, options.valuesOf( "after-date" ) );

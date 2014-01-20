@@ -44,7 +44,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "j" ).withOptionalArg();
         parser.accepts( "k" );
 
-        OptionSet options =
+        final OptionSet options =
             parser.parse( "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "yermom" );
 
         assertOptionDetected( options, "i" );
@@ -60,7 +60,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
     public void shortOptionSpecifiedAsLongOptionWithoutArgument() {
         parser.accepts( "x" );
 
-        OptionSet options = parser.parse( "--x" );
+        final OptionSet options = parser.parse( "--x" );
         assertOptionDetected( options, "x" );
         assertEquals( emptyList(), options.valuesOf( "x" ) );
         assertEquals( emptyList(), options.nonOptionArguments() );
@@ -71,7 +71,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "quiet" );
         parser.accepts( "queen" );
 
-        OptionSet options = parser.parse( "-quiet" );
+        final OptionSet options = parser.parse( "-quiet" );
         assertOptionDetected( options, "quiet" );
         assertEquals( emptyList(), options.valuesOf( "quiet" ) );
         assertEquals( emptyList(), options.nonOptionArguments() );
@@ -94,7 +94,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "q" );
         parser.accepts( "u" );
 
-        OptionSet options = parser.parse( "-qu" );
+        final OptionSet options = parser.parse( "-qu" );
         assertOptionDetected( options, "q" );
         assertOptionDetected( options, "u" );
         assertOptionNotDetected( options, "quiet" );
@@ -121,7 +121,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "queen" );
         parser.accepts( "q" ).withOptionalArg();
 
-        OptionSet options = parser.parse( "-qu" );
+        final OptionSet options = parser.parse( "-qu" );
         assertOptionDetected( options, "q" );
         assertOptionNotDetected( options, "quiet" );
         assertOptionNotDetected( options, "queen" );
@@ -135,9 +135,9 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "j" ).withOptionalArg();
         parser.accepts( "k" );
 
-        String[] args = { "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "yermom" };
+        final String[] args = { "-ibar", "-i", "junk", "xyz", "-jixnay", "foo", "-k", "blah", "--", "yermom" };
 
-        OptionSet options = parser.parse( args );
+        final OptionSet options = parser.parse( args );
         assertEquals( options, parser.parse( args ) );
     }
 
@@ -146,7 +146,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "a" ).withRequiredArg().ofType( Boolean.class );
         parser.accepts( "b" ).withOptionalArg().ofType( Integer.class );
 
-        OptionSet options = parser.parse( "-a", "false", "-b", "3", "extra" );
+        final OptionSet options = parser.parse( "-a", "false", "-b", "3", "extra" );
 
         assertOptionDetected( options, "a" );
         assertOptionDetected( options, "b" );
@@ -163,7 +163,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "j" ).withOptionalArg();
         parser.accepts( "k" );
 
-        OptionSet options = parser.parse( "a", "b", "c", "-i", "boo", "d", "e", "-k", "f", "-j" );
+        final OptionSet options = parser.parse( "a", "b", "c", "-i", "boo", "d", "e", "-k", "f", "-j" );
 
         assertOptionDetected( options, "i" );
         assertEquals( singletonList( "boo" ), options.valuesOf( "i" ) );
@@ -181,7 +181,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
         parser.accepts( "k" );
         parser.posixlyCorrect( true );
 
-        OptionSet options = parser.parse( "a", "b", "c", "-i", "boo", "d", "e", "-k", "f", "-j" );
+        final OptionSet options = parser.parse( "a", "b", "c", "-i", "boo", "d", "e", "-k", "f", "-j" );
 
         assertOptionNotDetected( options, "i" );
         assertEquals( emptyList(), options.valuesOf( "i" ) );
@@ -194,7 +194,7 @@ public class OptionParserTest extends AbstractOptionParserFixture {
 
     @Test
     public void doubleHyphenSignalsEndsOfOptions() {
-        OptionSet options = new OptionParser( "ab:c::de:f::" ) {
+        final OptionSet options = new OptionParser( "ab:c::de:f::" ) {
             {
                 accepts( "verbose" );
             }
@@ -215,9 +215,9 @@ public class OptionParserTest extends AbstractOptionParserFixture {
 
     @Test
     public void allowsEmptyStringAsArgumentOfOption() {
-        OptionSpec<String> optionI = parser.accepts( "i" ).withOptionalArg();
+        final OptionSpec<String> optionI = parser.accepts( "i" ).withOptionalArg();
 
-        OptionSet options = parser.parse( "-i", "" );
+        final OptionSet options = parser.parse( "-i", "" );
 
         assertOptionDetected( options, "i" );
         assertEquals( "", optionI.value( options ) );
@@ -225,10 +225,10 @@ public class OptionParserTest extends AbstractOptionParserFixture {
 
     @Test
     public void allowsWhitespaceyStringAsArgumentOfOption() {
-        String whitespace = "     \t\t\n\n\f\f     \r\r   ";
-        OptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
+        final String whitespace = "     \t\t\n\n\f\f     \r\r   ";
+        final OptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-j", whitespace );
+        final OptionSet options = parser.parse( "-j", whitespace );
 
         assertOptionDetected( options, "j" );
         assertEquals( whitespace, optionJ.value( options ) );
@@ -236,15 +236,15 @@ public class OptionParserTest extends AbstractOptionParserFixture {
 
     @Test
     public void allowsEmbeddedWhitespaceInArgumentOfOption() {
-        String withEmbeddedWhitespace = "   look at me, I'm flaunting the rules!   ";
-        OptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
+        final String withEmbeddedWhitespace = "   look at me, I'm flaunting the rules!   ";
+        final OptionSpec<String> optionJ = parser.accepts( "j" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-j", withEmbeddedWhitespace );
+        final OptionSet options = parser.parse( "-j", withEmbeddedWhitespace );
 
         assertOptionDetected( options, "j" );
         assertEquals( withEmbeddedWhitespace, optionJ.value( options ) );
     }
-    
+
     @Test
     public void requiredOptionWithArgMissing() {
         parser.accepts( "t" ).withOptionalArg().required();

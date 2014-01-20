@@ -35,14 +35,14 @@ public enum OptionOrder {
      */
     FIRST_OPTION_ORDER {
         @Override
-        public List<OptionSpec<?>> of( OptionParser optionParser ) {
-            Comparator<OptionSpec<?>> byFirstOption = new Comparator<OptionSpec<?>>() {
-                public int compare( OptionSpec<?> first, OptionSpec<?> second ) {
+        public List<OptionSpec<?>> of( final OptionParser optionParser ) {
+            final Comparator<OptionSpec<?>> byFirstOption = new Comparator<OptionSpec<?>>() {
+                public int compare( final OptionSpec<?> first, final OptionSpec<?> second ) {
                     return first.options().iterator().next().compareTo( second.options().iterator().next() );
                 }
             };
 
-            List<OptionSpec<?>> sorted = new ArrayList<OptionSpec<?>>( optionParser.abbreviationOrder() );
+            final List<OptionSpec<?>> sorted = new ArrayList<OptionSpec<?>>( optionParser.abbreviationOrder() );
             sort( sorted, byFirstOption );
             return sorted;
         }
@@ -53,7 +53,7 @@ public enum OptionOrder {
      */
     TRAINING_ORDER {
         @Override
-        public List<? extends OptionSpec<?>> of( OptionParser optionParser ) {
+        public List<? extends OptionSpec<?>> of( final OptionParser optionParser ) {
             return optionParser.trainingOrder();
         }
     };
@@ -67,10 +67,10 @@ public enum OptionOrder {
     public abstract List<? extends OptionSpec<?>> of( OptionParser optionParser );
 
     /** @todo Does not belong here */
-    public static Map<String, ? extends OptionSpec<?>> asMap( Collection<? extends OptionSpec<?>> specs ) {
+    public static Map<String, ? extends OptionSpec<?>> asMap( final Collection<? extends OptionSpec<?>> specs ) {
         final Map<String, OptionSpec<?>> map = new LinkedHashMap<String, OptionSpec<?>>();
-        for ( OptionSpec<?> spec : specs )
-            for ( String option : spec.options() )
+        for ( final OptionSpec<?> spec : specs )
+            for ( final String option : spec.options() )
                 map.put( option, spec );
         return map;
     }

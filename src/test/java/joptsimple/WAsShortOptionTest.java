@@ -44,7 +44,7 @@ public class WAsShortOptionTest extends AbstractOptionParserFixture {
 
     @Test
     public void wIsLegal() {
-        OptionSet options = parser.parse( "-W", "silent" );
+        final OptionSet options = parser.parse( "-W", "silent" );
 
         assertOptionDetected( options, "W" );
         assertEquals( emptyList(), options.valuesOf( "W" ) );

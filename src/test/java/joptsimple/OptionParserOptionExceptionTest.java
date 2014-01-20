@@ -69,7 +69,7 @@ public class OptionParserOptionExceptionTest extends AbstractOptionParserFixture
     @Test
     public void valueOfWhenMultiples() {
         parser.accepts( "e" ).withRequiredArg();
-        OptionSet options = parser.parse( "-e", "foo", "-e", "bar" );
+        final OptionSet options = parser.parse( "-e", "foo", "-e", "bar" );
         thrown.expect( MultipleArgumentsForOptionException.class );
         thrown.expect( withOption( "e" ) );
 

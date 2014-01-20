@@ -43,39 +43,39 @@ class Columns {
     private final int optionWidth;
     private final int descriptionWidth;
 
-    Columns( int optionWidth, int descriptionWidth ) {
+    Columns( final int optionWidth, final int descriptionWidth ) {
         this.optionWidth = optionWidth;
         this.descriptionWidth = descriptionWidth;
     }
 
-    List<Row> fit( Row row ) {
-        List<String> options = piecesOf( row.option, optionWidth );
-        List<String> descriptions = piecesOf( row.description, descriptionWidth );
+    List<Row> fit( final Row row ) {
+        final List<String> options = piecesOf( row.option, optionWidth );
+        final List<String> descriptions = piecesOf( row.description, descriptionWidth );
 
-        List<Row> rows = new ArrayList<Row>();
+        final List<Row> rows = new ArrayList<Row>();
         for ( int i = 0; i < Math.max( options.size(), descriptions.size() ); ++i )
             rows.add( new Row( itemOrEmpty( options, i ), itemOrEmpty( descriptions, i ) ) );
 
         return rows;
     }
 
-    private static String itemOrEmpty( List<String> items, int index ) {
+    private static String itemOrEmpty( final List<String> items, final int index ) {
         return index >= items.size() ? "" : items.get( index );
     }
 
-    private List<String> piecesOf( String raw, int width ) {
-        List<String> pieces = new ArrayList<String>();
+    private List<String> piecesOf( final String raw, final int width ) {
+        final List<String> pieces = new ArrayList<String>();
 
-        for ( String each : raw.trim().split( LINE_SEPARATOR ) )
+        for ( final String each : raw.trim().split( LINE_SEPARATOR ) )
             pieces.addAll( piecesOfEmbeddedLine( each, width ) );
 
         return pieces;
     }
 
-    private List<String> piecesOfEmbeddedLine( String line, int width ) {
-        List<String> pieces = new ArrayList<String>();
+    private List<String> piecesOfEmbeddedLine( final String line, final int width ) {
+        final List<String> pieces = new ArrayList<String>();
 
-        BreakIterator words = BreakIterator.getLineInstance( Locale.US );
+        final BreakIterator words = BreakIterator.getLineInstance( Locale.US );
         words.setText( line );
 
         StringBuilder nextPiece = new StringBuilder();
@@ -90,11 +90,11 @@ class Columns {
         return pieces;
     }
 
-    private StringBuilder processNextWord( String source, StringBuilder nextPiece, int start, int end, int width,
-                                           List<String> pieces ) {
+    private StringBuilder processNextWord( final String source, final StringBuilder nextPiece, final int start, final int end, final int width,
+                                           final List<String> pieces ) {
         StringBuilder augmented = nextPiece;
 
-        String word = source.substring( start, end );
+        final String word = source.substring( start, end );
         if ( augmented.length() + word.length() > width ) {
             pieces.add( augmented.toString().replaceAll( "\\s+$", "" ) );
             augmented = new StringBuilder( repeat( ' ', INDENT_WIDTH ) ).append( word );

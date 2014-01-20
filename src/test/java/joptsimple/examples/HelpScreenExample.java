@@ -8,9 +8,9 @@ import static java.io.File.pathSeparatorChar;
 import static java.util.Arrays.asList;
 import static joptsimple.util.DateConverter.datePattern;
 
-public class HelpScreenExample {
-    public static void main( String[] args ) throws Exception {
-        OptionParser parser = new OptionParser() {
+public final class HelpScreenExample {
+    public static void main( final String[] args ) throws Exception {
+        final OptionParser parser = new OptionParser() {
             {
                 accepts( "c" ).withRequiredArg().ofType( Integer.class )
                     .describedAs( "count" ).defaultsTo( 1 );

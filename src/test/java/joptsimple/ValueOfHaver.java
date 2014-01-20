@@ -28,12 +28,12 @@ package joptsimple;
 /**
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
-public class ValueOfHaver {
+public final class ValueOfHaver {
     private ValueOfHaver() {
         // no-op
     }
 
-    public static ValueOfHaver valueOf( String s ) {
+    public static ValueOfHaver valueOf( final String s ) {
         return null;
     }
 }

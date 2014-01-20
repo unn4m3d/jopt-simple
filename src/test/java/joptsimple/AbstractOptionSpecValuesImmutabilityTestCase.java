@@ -36,8 +36,8 @@ import org.infinitest.toolkit.UnmodifiableListTestSupport;
 public abstract class AbstractOptionSpecValuesImmutabilityTestCase<T> extends UnmodifiableListTestSupport<T> {
     @Override
     protected List<T> newList() {
-        AbstractOptionSpec<T> spec = newOptionSpec();
-        OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
+        final AbstractOptionSpec<T> spec = newOptionSpec();
+        final OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
         options.addWithArgument( spec, firstArg() );
         options.addWithArgument( spec, secondArg() );
 

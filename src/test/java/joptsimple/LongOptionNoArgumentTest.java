@@ -45,7 +45,7 @@ public class LongOptionNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void singleLongOption() {
-        OptionSet options = parser.parse( "--verbose" );
+        final OptionSet options = parser.parse( "--verbose" );
 
         assertTrue( options.has( "verbose" ) );
         assertEquals( emptyList(), options.valuesOf( "verbose" ) );
@@ -54,7 +54,7 @@ public class LongOptionNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void singleLongOptionAbbreviated() {
-        OptionSet options = parser.parse( "--verbo" );
+        final OptionSet options = parser.parse( "--verbo" );
 
         assertTrue( options.has( "verbose" ) );
         assertFalse( options.has( "verb" ) );
@@ -64,7 +64,7 @@ public class LongOptionNoArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void abbreviationIsALegalOption() {
-        OptionSet options = parser.parse( "--verb" );
+        final OptionSet options = parser.parse( "--verb" );
 
         assertFalse( options.has( "verbose" ) );
         assertTrue( options.has( "verb" ) );

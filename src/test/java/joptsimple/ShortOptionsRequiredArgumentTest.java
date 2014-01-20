@@ -56,7 +56,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void withArgument() {
-        OptionSet options = parser.parse( "-d", "foo" );
+        final OptionSet options = parser.parse( "-d", "foo" );
 
         assertOptionDetected( options, "d" );
         assertEquals( "foo", options.valueOf( "d" ) );
@@ -66,34 +66,34 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
     @Test
     public void clusteredOptionsWithLastOneAcceptingAnArgumentButMissing() {
         thrown.expect( OptionMissingRequiredArgumentException.class );
-        
+
         parser.parse( "-fed" );
     }
-    
+
     @Test
     public void clusteredOptionsWithLastOneAcceptingAnArgument() {
-        OptionSet options = parser.parse( "-fed", "foo" );
-        
+        final OptionSet options = parser.parse( "-fed", "foo" );
+
         assertOptionDetected( options, "d" );
         assertOptionDetected( options, "f" );
         assertOptionDetected( options, "e" );
         assertEquals( "foo", options.valueOf( "d" ) );
     }
-    
+
     @Test
     public void clusteredOptionsWithOneAcceptingAnArgument() {
-        OptionSet options = parser.parse( "-fde" );
-        
+        final OptionSet options = parser.parse( "-fde" );
+
         assertOptionDetected( options, "f" );
         assertOptionDetected( options, "d" );
         assertOptionNotDetected( options, "e" );
-        
+
         assertEquals( "e", options.valueOf( "d" ) );
     }
 
     @Test
     public void argumentNotPresentFollowedByAnotherOption() {
-        OptionSet options = parser.parse( "-d", "--infile" );
+        final OptionSet options = parser.parse( "-d", "--infile" );
 
         assertOptionDetected( options, "d" );
         assertOptionNotDetected( options, "infile" );
@@ -103,7 +103,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void appearingMultipleTimes() {
-        OptionSet options = parser.parse( "-d", "foo", "-d", "bar" );
+        final OptionSet options = parser.parse( "-d", "foo", "-d", "bar" );
 
         assertOptionDetected( options, "d" );
         assertEquals( asList( "foo", "bar" ), options.valuesOf( "d" ) );
@@ -112,7 +112,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void inSameToken() {
-        OptionSet options = parser.parse( "-dfoo" );
+        final OptionSet options = parser.parse( "-dfoo" );
 
         assertOptionDetected( options, "d" );
         assertEquals( singletonList( "foo" ), options.valuesOf( "d" ) );
@@ -121,7 +121,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void whenEndOfOptionsMarkerIsInPlaceOfRequiredArgument() {
-        OptionSet options = parser.parse( "-d", "--", "foo", "bar" );
+        final OptionSet options = parser.parse( "-d", "--", "foo", "bar" );
 
         assertOptionDetected( options, "d" );
         assertEquals( singletonList( "--" ), options.valuesOf( "d" ) );

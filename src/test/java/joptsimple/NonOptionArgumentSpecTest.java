@@ -39,52 +39,52 @@ import static org.junit.Assert.*;
 public class NonOptionArgumentSpecTest extends AbstractOptionParserFixture {
     @Test
     public void allowsTypingOfNonOptionArguments() {
-        OptionSpec<File> nonOptions = parser.nonOptions().ofType( File.class );
+        final OptionSpec<File> nonOptions = parser.nonOptions().ofType( File.class );
 
-        OptionSet options = parser.parse( "/opt", "/var" );
+        final OptionSet options = parser.parse( "/opt", "/var" );
 
         assertEquals( asList( new File( "/opt" ), new File( "/var" ) ), nonOptions.values( options ) );
     }
 
     @Test
     public void allowsDescriptionOfNonOptionArguments() {
-        OptionSpec<String> nonOptions = parser.nonOptions( "directories" );
+        final OptionSpec<String> nonOptions = parser.nonOptions( "directories" );
 
-        OptionSet options = parser.parse( "/opt", "/var" );
+        final OptionSet options = parser.parse( "/opt", "/var" );
 
         assertEquals( asList( "/opt", "/var" ), nonOptions.values( options ) );
     }
 
     @Test
     public void allowsTypeAndDescriptionOfNonOptionArguments() {
-        OptionSpec<File> nonOptions = parser.nonOptions( "directories" ).ofType( File.class );
+        final OptionSpec<File> nonOptions = parser.nonOptions( "directories" ).ofType( File.class );
 
-        OptionSet options = parser.parse( "/opt", "/var" );
+        final OptionSet options = parser.parse( "/opt", "/var" );
 
         assertEquals( asList( new File( "/opt" ), new File( "/var" ) ), nonOptions.values( options ) );
     }
 
     @Test
     public void allowsArgumentDescriptionForNonOptionArguments() {
-        OptionSpec<String> nonOptions = parser.nonOptions().describedAs( "dirs" );
+        final OptionSpec<String> nonOptions = parser.nonOptions().describedAs( "dirs" );
 
-        OptionSet options = parser.parse( "/opt", "/var" );
+        final OptionSet options = parser.parse( "/opt", "/var" );
 
         assertEquals( asList( "/opt", "/var" ), nonOptions.values( options ) );
     }
 
     @Test
     public void doesNotAcceptArguments() {
-        OptionDescriptor nonOptions = parser.nonOptions().describedAs( "dirs" );
+        final OptionDescriptor nonOptions = parser.nonOptions().describedAs( "dirs" );
 
         assertFalse( nonOptions.acceptsArguments() );
     }
 
     @Test
     public void convertingUsingConverter() throws Exception {
-        OptionSpec<Date> date = parser.nonOptions().withValuesConvertedBy( datePattern( "MM/dd/yyyy" ) );
+        final OptionSpec<Date> date = parser.nonOptions().withValuesConvertedBy( datePattern( "MM/dd/yyyy" ) );
 
-        OptionSet options = parser.parse( "01/24/2013" );
+        final OptionSet options = parser.parse( "01/24/2013" );
 
         assertEquals(
             singletonList( new SimpleDateFormat( "MM/dd/yyyy" ).parse( "01/24/2013" ) ),

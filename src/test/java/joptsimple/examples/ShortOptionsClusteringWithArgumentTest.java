@@ -9,12 +9,12 @@ import static org.junit.Assert.*;
 public class ShortOptionsClusteringWithArgumentTest {
     @Test
     public void allowsClusteringShortOptionsThatAcceptArguments() {
-        OptionParser parser = new OptionParser();
+        final OptionParser parser = new OptionParser();
         parser.accepts( "a" );
         parser.accepts( "B" );
         parser.accepts( "c" ).withRequiredArg();
 
-        OptionSet options = parser.parse( "-aBcfoo" );
+        final OptionSet options = parser.parse( "-aBcfoo" );
 
         assertTrue( options.has( "a" ) );
         assertTrue( options.has( "B" ) );

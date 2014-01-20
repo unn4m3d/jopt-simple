@@ -36,17 +36,17 @@ import static java.util.Collections.*;
  * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
 class NoArgumentOptionSpec extends AbstractOptionSpec<Void> {
-    NoArgumentOptionSpec( String option ) {
+    NoArgumentOptionSpec( final String option ) {
         this( singletonList( option ), "" );
     }
 
-    NoArgumentOptionSpec( Collection<String> options, String description ) {
+    NoArgumentOptionSpec( final Collection<String> options, final String description ) {
         super( options, description );
     }
 
     @Override
-    void handleOption( OptionParser parser, ArgumentList arguments, OptionSet detectedOptions,
-        String detectedArgument ) {
+    void handleOption( final OptionParser parser, final ArgumentList arguments, final OptionSet detectedOptions,
+        final String detectedArgument ) {
 
         detectedOptions.add( this );
     }
@@ -71,7 +71,7 @@ class NoArgumentOptionSpec extends AbstractOptionSpec<Void> {
         return "";
     }
 
-    public Void convert( String argument ) {
+    public Void convert( final String argument ) {
         return null;
     }
 

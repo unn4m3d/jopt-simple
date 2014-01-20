@@ -37,7 +37,7 @@ class OptionArgumentConversionException extends OptionException {
 
     private final String argument;
 
-    OptionArgumentConversionException( Collection<String> options, String argument, Throwable cause ) {
+    OptionArgumentConversionException( final Collection<String> options, final String argument, final Throwable cause ) {
         super( options, cause );
 
         this.argument = argument;

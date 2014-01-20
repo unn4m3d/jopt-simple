@@ -47,7 +47,7 @@ public class DateConverter implements ValueConverter<Date> {
      * @param formatter the formatter/parser to use
      * @throws NullPointerException if {@code formatter} is {@code null}
      */
-    public DateConverter( DateFormat formatter ) {
+    public DateConverter( final DateFormat formatter ) {
         if ( formatter == null )
             throw new NullPointerException( "illegal null formatter" );
 
@@ -63,17 +63,17 @@ public class DateConverter implements ValueConverter<Date> {
      * @throws NullPointerException if {@code pattern} is {@code null}
      * @throws IllegalArgumentException if {@code pattern} is invalid
      */
-    public static DateConverter datePattern( String pattern ) {
-        SimpleDateFormat formatter = new SimpleDateFormat( pattern );
+    public static DateConverter datePattern( final String pattern ) {
+        final SimpleDateFormat formatter = new SimpleDateFormat( pattern );
         formatter.setLenient( false );
 
         return new DateConverter( formatter );
     }
 
-    public Date convert( String value ) {
-        ParsePosition position = new ParsePosition( 0 );
+    public Date convert( final String value ) {
+        final ParsePosition position = new ParsePosition( 0 );
 
-        Date date = formatter.parse( value, position );
+        final Date date = formatter.parse( value, position );
         if ( position.getIndex() != value.length() )
             throw new ValueConversionException( message( value ) );
 
@@ -90,7 +90,7 @@ public class DateConverter implements ValueConverter<Date> {
             : "";
     }
 
-    private String message( String value ) {
+    private String message( final String value ) {
         String message = "Value [" + value + "] does not match date/time pattern";
         if ( formatter instanceof SimpleDateFormat )
             message += " [" + ( (SimpleDateFormat) formatter ).toPattern() + ']';

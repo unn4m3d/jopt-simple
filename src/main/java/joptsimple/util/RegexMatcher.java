@@ -49,7 +49,7 @@ public class RegexMatcher implements ValueConverter<String> {
      * set in {@code flags}
      * @throws java.util.regex.PatternSyntaxException if the expression's syntax is invalid
      */
-    public RegexMatcher( String pattern, int flags ) {
+    public RegexMatcher( final String pattern, final int flags ) {
         this.pattern = compile( pattern, flags );
     }
 
@@ -60,11 +60,11 @@ public class RegexMatcher implements ValueConverter<String> {
      * @return the new converter
      * @throws java.util.regex.PatternSyntaxException if the expression's syntax is invalid
      */
-    public static ValueConverter<String> regex( String pattern ) {
+    public static ValueConverter<String> regex( final String pattern ) {
         return new RegexMatcher( pattern, 0 );
     }
 
-    public String convert( String value ) {
+    public String convert( final String value ) {
         if ( !pattern.matcher( value ).matches() ) {
             throw new ValueConversionException(
                 "Value [" + value + "] did not match regex [" + pattern.pattern() + ']' );

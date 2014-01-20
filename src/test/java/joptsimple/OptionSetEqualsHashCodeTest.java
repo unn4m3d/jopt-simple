@@ -35,21 +35,21 @@ import org.infinitest.toolkit.StrictEqualsHashCodeTestSupport;
 public class OptionSetEqualsHashCodeTest extends StrictEqualsHashCodeTestSupport {
     @Override
     protected OptionSet equal() {
-        OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
+        final OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
         options.addWithArgument( new RequiredArgumentOptionSpec<String>( "anOption" ), "anArg" );
         return options;
     }
 
     @Override
     protected OptionSet notEqual() {
-        OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
+        final OptionSet options = new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() );
         options.addWithArgument( new RequiredArgumentOptionSpec<String>( "anOption" ), "aDifferentArg" );
         return options;
     }
 
     @Override
     protected Object equalButDifferentClass() {
-        OptionSet options =
+        final OptionSet options =
                 new OptionSet( Collections.<String, AbstractOptionSpec<?>> emptyMap() ) {
                 // anonymous subclass
             };

@@ -40,9 +40,9 @@ import static org.junit.Assert.*;
 public class OptionSpecsReportTheirOptionsSortedSpeciallyTest {
     @Test
     public void shortOptionsComeFirstFollowedByLongOptionsLexicographically() {
-        AbstractOptionSpec<Void> spec = new NoArgumentOptionSpec( asList( "after-date", "n", "N", "past" ), "" );
+        final AbstractOptionSpec<Void> spec = new NoArgumentOptionSpec( asList( "after-date", "n", "N", "past" ), "" );
 
-        List<String> actualOptions = new ArrayList<String>( spec.options() );
+        final List<String> actualOptions = new ArrayList<String>( spec.options() );
 
         assertEquals( asList( "N", "n", "after-date", "past" ), actualOptions );
     }

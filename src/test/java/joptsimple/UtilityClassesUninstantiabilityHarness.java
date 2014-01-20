@@ -43,13 +43,13 @@ public abstract class UtilityClassesUninstantiabilityHarness {
 
     private final Class<?> utility;
 
-    protected UtilityClassesUninstantiabilityHarness( Class<?> utility ) {
+    protected UtilityClassesUninstantiabilityHarness( final Class<?> utility ) {
         this.utility = utility;
     }
 
     @Test
     public final void attemptToInstantiate() throws Exception {
-        Constructor<?> constructor = utility.getDeclaredConstructor();
+        final Constructor<?> constructor = utility.getDeclaredConstructor();
         constructor.setAccessible( true );
 
         thrown.expect( InvocationTargetException.class );
