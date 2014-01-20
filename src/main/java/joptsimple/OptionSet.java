@@ -252,7 +252,7 @@ public class OptionSet {
      * @return the detected non-option arguments
      */
     public List<?> nonOptionArguments() {
-        return unmodifiableList( valuesOf( detectedOptions.get( NonOptionArgumentSpec.NAME ) ) );
+        return valuesOf(detectedOptions.get(NonOptionArgumentSpec.NAME));
     }
 
     void add( AbstractOptionSpec<?> spec ) {
