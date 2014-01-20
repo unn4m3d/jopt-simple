@@ -69,7 +69,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        <groupId>junit</groupId>
+            <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
@@ -105,18 +105,27 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>
                 <version>1.9</version>
+                <!-- TODO: Remove asm dep when animal sniffer updated. -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>5.0_BETA</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
                     <signature>
                         <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java15</artifactId>
+                        <!-- TODO: Use java8 signarture when available. -->
+                        <artifactId>java17</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
@@ -173,7 +182,7 @@
                 <version>2.5</version>
                 <configuration>
                     <minimumTokens>40</minimumTokens>
-                    <targetJdk>1.5</targetJdk>
+                    <targetJdk>1.8</targetJdk>
                 </configuration>
                 <executions>
                     <execution>
@@ -254,14 +263,15 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
                 <configuration>
-                    <additionalparam>${disable-doclint}</additionalparam>
-                    <source>1.5</source>
+                    <!-- TODO: Reenable doclint when feasible. -->
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <source>1.8</source>
                     <show>public</show>
-                    <excludePackageNames>joptsimple.examples:joptsimple.internal:joptsimple.internal.*</excludePackageNames>
-                    <links>
-                        <link>http://download.oracle.com/javase/1.5.0/docs/api</link>
-                    </links>
-                    <bottom><![CDATA[<i>&copy; Copyright 2004-2014 Paul R. Holser, Jr.  All rights reserved. Licensed under The MIT License. pholser@alumni.rice.edu</i>]]></bottom>
+                    <excludePackageNames>
+                        joptsimple.examples:joptsimple.internal:joptsimple.internal.*
+                    </excludePackageNames>
+                    <bottom>
+                        <![CDATA[<i>&copy; Copyright 2004-2014 Paul R. Holser, Jr.  All rights reserved. Licensed under The MIT License. pholser@alumni.rice.edu</i>]]></bottom>
                 </configuration>
                 <reportSets>
                     <reportSet>
@@ -301,7 +311,7 @@
                 <version>2.5</version>
                 <configuration>
                     <minimumTokens>40</minimumTokens>
-                    <targetJdk>1.5</targetJdk>
+                    <targetJdk>1.8</targetJdk>
                 </configuration>
             </plugin>
         </plugins>
@@ -312,16 +322,4 @@
             <url>gitsite:git@github.com/pholser/jopt-simple.git</url>
         </site>
     </distributionManagement>
-    <profiles>
-        <profile>
-            <!-- TODO: Workaround for JDK8 - avoid javadoc bug on HTML kbd tag -->
-            <id>javadoc-8-broken</id>
-            <activation>
-                <jdk>1.8</jdk>
-            </activation>
-            <properties>
-                <disable-doclint>-Xdoclint:none</disable-doclint>
-            </properties>
-        </profile>
-    </profiles>
 </project>
