@@ -216,7 +216,7 @@ public class OptionSet {
 
         List<V> convertedValues = new ArrayList<V>();
         for ( String each : values )
-            convertedValues.add( option.convert(each) );
+            convertedValues.add( option.convert( each ) );
 
         return unmodifiableList( convertedValues );
     }
@@ -248,10 +248,11 @@ public class OptionSet {
     }
 
     /**
-     * @return the detected non-option arguments
+     * @return the unmodifiable detected non-option arguments
      */
     public List<?> nonOptionArguments() {
-        return unmodifiableList( valuesOf( detectedOptions.get( NonOptionArgumentSpec.NAME ) ) );
+        // NB - If there are none, empty list; else unmodifiable, converted copy
+        return valuesOf( detectedOptions.get( NonOptionArgumentSpec.NAME ) );
     }
 
     void add( OptionSpec<?> spec ) {
