@@ -74,7 +74,7 @@ public class LongOptionRequiredArgumentTest extends AbstractOptionParserFixture 
 
     @Test
     public void argumentMissing() {
-        thrown.expect( OptionMissingRequiredArgumentException.class );
+        thrown.expect( OptionsMissingRequiredArgumentException.class );
         thrown.expect( withOption( "quiet" ) );
 
         parser.parse( "--quiet" );

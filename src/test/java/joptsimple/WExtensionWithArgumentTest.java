@@ -84,7 +84,7 @@ public class WExtensionWithArgumentTest extends AbstractOptionParserFixture {
 
     @Test
     public void noMoreArguments() {
-        thrown.expect( OptionMissingRequiredArgumentException.class );
+        thrown.expect( OptionsMissingRequiredArgumentException.class );
         thrown.expect( withOption( "W" ) );
 
         parser.parse( "-W" );

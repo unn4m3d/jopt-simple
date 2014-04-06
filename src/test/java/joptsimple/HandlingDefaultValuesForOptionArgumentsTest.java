@@ -59,7 +59,7 @@ public class HandlingDefaultValuesForOptionArgumentsTest extends AbstractOptionP
         assertEquals( asList( expectedArgument ), optionA.values( options ) );
     }
 
-    @Test( expected = OptionMissingRequiredArgumentException.class )
+    @Test( expected = OptionsMissingRequiredArgumentException.class )
     public void requiredArgOptionWithDefaultStillsFailToParseIfArgNotSpecifiedOnCommandLine() {
         parser.accepts( "a" ).withRequiredArg().defaultsTo( "boo" );
 

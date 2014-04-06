@@ -48,7 +48,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void argumentNotPresent() {
-        thrown.expect( OptionMissingRequiredArgumentException.class );
+        thrown.expect( OptionsMissingRequiredArgumentException.class );
         thrown.expect( withOption( "d" ) );
 
         parser.parse( "-d" );
@@ -65,7 +65,7 @@ public class ShortOptionsRequiredArgumentTest extends AbstractOptionParserFixtur
 
     @Test
     public void clusteredOptionsWithLastOneAcceptingAnArgumentButMissing() {
-        thrown.expect( OptionMissingRequiredArgumentException.class );
+        thrown.expect( OptionsMissingRequiredArgumentException.class );
         
         parser.parse( "-fed" );
     }

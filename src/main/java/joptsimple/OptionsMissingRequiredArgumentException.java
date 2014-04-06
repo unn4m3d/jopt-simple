@@ -25,22 +25,22 @@
 
 package joptsimple;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
- * Thrown when an option is marked as required, but not specified on the command line.
+ * Thrown when the option parser discovers options that require an argument, but are missing an argument.
  *
- * @author <a href="https://github.com/TC1">Emils Solmanis</a>
+ * @author <a href="mailto:pholser@alumni.rice.edu">Paul Holser</a>
  */
-class MissingRequiredOptionException extends OptionException {
+class OptionsMissingRequiredArgumentException extends OptionException {
     private static final long serialVersionUID = -1L;
 
-    protected MissingRequiredOptionException( Collection<String> options ) {
+    OptionsMissingRequiredArgumentException( List<String> options ) {
         super( options );
     }
 
     @Override
     public String getMessage() {
-        return "Missing required option(s) " + multipleOptionMessage();
+        return "Option(s) " + multipleOptionMessage() + " require(s) an argument";
     }
 }
