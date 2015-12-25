@@ -376,7 +376,11 @@ public class OptionParser implements OptionDeclarer {
         detected.add( recognizedOptions.get( NonOptionArgumentSpec.NAME ) );
 
         while ( argumentList.hasMore() )
-            state.handleArgument( this, argumentList, detected );
+        	try{			
+            	state.handleArgument( this, argumentList, detected );
+            }catch(NullPointerException e){
+            	e.printStackTrace();
+            }
 
         reset();
 
